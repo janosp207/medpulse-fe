@@ -2,6 +2,7 @@ import axios from 'axios';
 import CryptoJS from 'crypto-js';
 import { setUser } from '../actions/users';
 import { API } from '../PATHS';
+import store from '../store';
 import { variables } from './variables';
 
 export default class Api {
@@ -52,8 +53,11 @@ export default class Api {
     }
 
     const response = await this.post(API.WITHINGS.GET_ACCESS_TOKEN, body);
-    console.log(response)
-    const user = response.data.body;
-    setUser(user)
+
+    if (response.data.body.userid) {
+      const user = response.data.body;
+      store.dispatch(setUser(user));
+    }
+    else return;
   }
 }

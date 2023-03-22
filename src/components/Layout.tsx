@@ -1,3 +1,4 @@
+import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -10,7 +11,6 @@ type Props = {
 }
 
 const Layout = ({user}: Props): JSX.Element => {
-  console.log(user);
 
   useEffect(() => {
     checkRedirect();
@@ -18,6 +18,7 @@ const Layout = ({user}: Props): JSX.Element => {
 
   return (
     <>
+      {user && <Typography variant="h1">Hello {user.userid}</Typography>}
       <Button onClick={() => Api.getNonce()}>getNonce</Button>
       <Button><a href={getAccessRedirect()} target="_blank" rel="noreferrer">get access token</a></Button>
     </>
