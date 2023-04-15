@@ -1,6 +1,7 @@
+import Header from '@/components/Patients/Header'
+import PatientInfo from '@/components/Patients/PatientInfo'
 import { usePatient } from '@/hooks/patients'
 import { Typography } from '@mui/material'
-import Header from '@/components/Patients/Header'
 
 const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
   const { latestData, patient } = usePatient(id)
@@ -10,6 +11,7 @@ const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} />
+      <PatientInfo />
     </>
   )
 }
