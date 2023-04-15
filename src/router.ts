@@ -1,5 +1,8 @@
 const PATHS = {
   HOME: '/',
+  PATIENT: {
+    SHOW: '/patients/:id',
+  }
 };
 
 const API_PATHS = {

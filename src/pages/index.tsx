@@ -1,3 +1,4 @@
+import PatientsList from '@/components/Home/PatientsList'
 import { usePatients } from '@/hooks/patients'
 import { Typography } from '@mui/material'
 
@@ -8,7 +9,8 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h1">Hello World</Typography>
+      <Typography variant="h1">Hello</Typography>
+      <PatientsList patients={patients} />
     </>
   )
 }
