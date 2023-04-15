@@ -1,3 +1,4 @@
+import LatestData from '@/classes/LatestData'
 import Patient from '@/classes/Patient'
 import { Box, Stack, styled, Typography } from '@mui/material'
 
@@ -42,9 +43,12 @@ const StyledLinkBox = styled(Box)({
 
 type Props = {
   patient: Patient
+  latestData: LatestData
 }
 
-const BasicPatientInfo = ({ patient }: Props): JSX.Element => {
+const BasicPatientInfo = ({ patient, latestData }: Props): JSX.Element => {
+  const { bmi, latestFatRatio, latestWeight  } = latestData
+
   return (
     <>
       <StyledPatientInfoBox> 
@@ -61,13 +65,13 @@ const BasicPatientInfo = ({ patient }: Props): JSX.Element => {
       <StyledPatientWeightBox>
         <Stack>
           <Typography>Weight</Typography>
-          <Typography variant="h5" fontWeight='bold'>15.4.2023</Typography>
+          <Typography variant="h5" fontWeight='bold'>{latestWeight.formattedDate}</Typography>
         </Stack>
 
         <Stack>
-          <Typography mt={3} mb={3} variant="h3" fontWeight='bold'>78kg</Typography>
-          <Typography >bmi</Typography>
-          <Typography >body fat</Typography>
+          <Typography mt={3} mb={3} variant="h3" fontWeight='bold'>{latestWeight.value} Kg</Typography>
+          <Typography >BMI: {bmi}</Typography>
+          <Typography >Fat ratio:{latestFatRatio.value}%</Typography>
         </Stack>
 
         <StyledLinkBox>

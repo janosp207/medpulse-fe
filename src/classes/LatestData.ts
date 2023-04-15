@@ -69,15 +69,50 @@ class BloodPressureData {
   }
 }
 
+class WeightData {
+  value = 0
+  // assign date to createdAt
+  date = 0
+
+  constructor(data: Partial<WeightData>) {
+    this.value = data.value ?? this.value
+    this.date = data.date ?? this.date
+  }
+
+  get formattedDate() {
+    return formatDate(this.date*1000)
+  }
+}
+
+class BodyFatData {
+  value = 0
+  // assign date to createdAt
+  date = 0
+  
+  constructor(data: Partial<BodyFatData>) {
+    this.value = data.value ?? this.value
+    this.date = data.date ?? this.date
+  }
+
+  get formattedDate() {
+    return formatDate(this.date*1000)
+  }
+}
 export default class LatestData{
   latestActivity = new ActivityData({})
   latestBloodOxygen = new BloodOxygenData({})
   latestBloodPressure = new BloodPressureData({})
+  latestWeight = new WeightData({})
+  latestFatRatio = new BodyFatData({})
+  bmi = 0
 
   constructor(data: Partial<LatestData>) {
     this.latestActivity = new ActivityData(data.latestActivity ?? {})
     this.latestBloodOxygen = new BloodOxygenData(data.latestBloodOxygen ?? {})
     this.latestBloodPressure = new BloodPressureData(data.latestBloodPressure ?? {})
+    this.latestWeight = new WeightData(data.latestWeight ?? {})
+    this.latestFatRatio = new BodyFatData(data.latestFatRatio ?? {})
+    this.bmi = data.bmi ?? this.bmi
   }
 
 }

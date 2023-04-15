@@ -1,4 +1,4 @@
-export const formatDate = (date: string): string => {
+export const formatDate = (date: string | number): string => {
   //format to dd.mm.yyyy
   const dateObj = new Date(date);
   const day = dateObj.getDate();
