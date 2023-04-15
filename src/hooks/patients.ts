@@ -20,3 +20,29 @@ export const usePatients = (): usePatientsReturnType => {
     isLoading: isLoading,
   }
 }
+
+type usePatientReturnType = {
+  latestData: unknown
+  patient: Patient | undefined
+  isLoading: boolean
+}
+
+export const usePatient = (id: string): usePatientReturnType => {
+  const { data: latestData, isLoading } = useSWR<Patient>(API_PATHS.PATIENTS.LATEST_DATA.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+  const { data: patient, isLoading: isLoadingPatient } = useSWR<Patient>(API_PATHS.PATIENTS.SHOW.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+  return {
+    latestData: latestData ? latestData : undefined,
+    patient: patient ? new Patient(patient) : undefined,
+    isLoading: isLoading || isLoadingPatient,
+  }
+}
