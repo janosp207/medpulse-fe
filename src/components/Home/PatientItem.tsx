@@ -25,9 +25,9 @@ const PatientItem = ({ patient }: Props): JSX.Element => {
   return (
     <Link href={PATHS.PATIENT.SHOW.replace(':id', `${patient.user_id}`)} style={{ textDecoration: 'none' }}>
       <BoxStyled>
-        <Stack>
+        <Stack sx={{ textAlign: 'left' }}>
           <Typography>Name</Typography>
-          <Typography fontWeight='bold'>{patient.user_id}</Typography>
+          <Typography fontWeight='bold'>{patient.name}</Typography>
         </Stack>
         <Box>
           <ArrowForwardIosIcon />
