@@ -4,11 +4,11 @@ import { Grid } from '@mui/material'
 
 const PatientInfo = (): JSX.Element => {
   return(
-    <Grid mt={5} container spacing={2}>
-      <Grid item xs={12} md={3}>
+    <Grid mt={0} pr={3} pl={3} container spacing={12}>
+      <Grid item xs={12} md={4}>
         <BasicPatientInfo />
       </Grid>
-      <Grid item xs={12} md={9}>
+      <Grid item xs={12} md={8}>
         <LatestData />
       </Grid>
     </Grid>
