@@ -9,7 +9,7 @@ export default function Home(): JSX.Element {
 
   return (
     <>
-      <Typography variant="h1">Hello</Typography>
+      <Typography variant="h1">BP</Typography>
       <PatientsList patients={patients} />
     </>
   )
