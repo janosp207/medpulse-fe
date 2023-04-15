@@ -16,6 +16,20 @@ class ActivityData {
   get formattedDate() {
     return formatDate(this.createdAt)
   }
+
+  get formattedCalories() {
+    //round to two decimal
+    this.calories = Math.round(this.calories * 100) / 100
+    return `${this.calories} kcal`
+  }
+
+  get formattedSteps() {
+    return `${this.steps}`
+  }
+
+  get formattedDistance() {
+    return `${this.distance} m`
+  }
 }
 
 class BloodOxygenData {

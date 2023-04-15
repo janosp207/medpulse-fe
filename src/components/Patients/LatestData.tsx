@@ -20,13 +20,13 @@ const LatestData = ({ latestData }: Props): JSX.Element => {
 
         <Grid  container spacing={10}>
           <Grid item xs={12} md={3}>
-            <SmallInfoBox title='Steps' date={latestActivity.formattedDate} value={`${latestActivity.steps}`} />
+            <SmallInfoBox title='Steps' date={latestActivity.formattedDate} value={latestActivity.formattedSteps} />
           </Grid>
           <Grid item xs={12} md={3}>
-            <SmallInfoBox title='Distance' date={latestActivity.formattedDate} value={`${latestActivity.distance}`} />
+            <SmallInfoBox title='Distance' date={latestActivity.formattedDate} value={latestActivity.formattedDistance} />
           </Grid>
           <Grid item xs={12} md={3}>
-            <SmallInfoBox title='Burned calories' date={latestActivity.formattedDate} value={`${latestActivity.calories}`} />
+            <SmallInfoBox title='Burned calories' date={latestActivity.formattedDate} value={latestActivity.formattedCalories} />
           </Grid>
         </Grid>
       </Box>
