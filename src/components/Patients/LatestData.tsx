@@ -1,9 +1,16 @@
+import LatestDataType from '@/classes/LatestData'
 import { Box, Grid, Typography } from '@mui/material'
 import BigInfoBox from './InfoBoxes/BigInfoBox'
 import SleepBox from './InfoBoxes/SleepBox'
 import SmallInfoBox from './InfoBoxes/SmallInfoBox'
 
-const LatestData = (): JSX.Element => {
+type Props = {
+  latestData: LatestDataType
+}
+
+const LatestData = ({ latestData }: Props): JSX.Element => {
+  const { latestActivity, latestBloodOxygen, latestBloodPressure } = latestData
+
   return (
     <>
       <SleepBox />
@@ -13,10 +20,13 @@ const LatestData = (): JSX.Element => {
 
         <Grid  container spacing={10}>
           <Grid item xs={12} md={3}>
-            <SmallInfoBox title='Steps' date='15.4.2023' value='2003' />
+            <SmallInfoBox title='Steps' date={latestActivity.formattedDate} value={`${latestActivity.steps}`} />
           </Grid>
           <Grid item xs={12} md={3}>
-            <SmallInfoBox title='Burned calories' date='15.4.2023' value='230kcal' />
+            <SmallInfoBox title='Distance' date={latestActivity.formattedDate} value={`${latestActivity.distance}`} />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <SmallInfoBox title='Burned calories' date={latestActivity.formattedDate} value={`${latestActivity.calories}`} />
           </Grid>
         </Grid>
       </Box>
@@ -26,10 +36,10 @@ const LatestData = (): JSX.Element => {
 
         <Grid  container spacing={10}>
           <Grid item xs={12} md={3}>
-            <BigInfoBox title='Blood pressure' date='15.4.2023' value='120/100' />
+            <BigInfoBox title='Blood pressure' date={latestBloodPressure.formattedDate} value={latestBloodPressure.formattedBloodPressure} />
           </Grid>
           <Grid item xs={12} md={3}>
-            <BigInfoBox title='Blood oxygen' date='15.4.2023' value='94%' />
+            <BigInfoBox title='Blood oxygen' date={latestBloodOxygen.formattedDate} value={latestBloodOxygen.formattedBloodOxygen} />
           </Grid>
         </Grid>
       </Box>

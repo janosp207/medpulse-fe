@@ -1,3 +1,4 @@
+import LatestData from '@/classes/LatestData'
 import Patient from '@/classes/Patient'
 import { API_PATHS } from '@/router'
 import axios from '@/utils/axios'
@@ -22,16 +23,16 @@ export const usePatients = (): usePatientsReturnType => {
 }
 
 type usePatientReturnType = {
-  latestData: unknown
+  latestData: LatestData | undefined
   patient: Patient | undefined
   isLoading: boolean
 }
 
 export const usePatient = (id: string): usePatientReturnType => {
-  const { data: latestData, isLoading } = useSWR<Patient>(API_PATHS.PATIENTS.LATEST_DATA.replace(':id', id), async url => {
+  const { data: latestData, isLoading } = useSWR<LatestData>(API_PATHS.PATIENTS.LATEST_DATA.replace(':id', id), async url => {
     const { data } = await axios.get(url);
 
-    return data;
+    return data.body;
   });
 
   const { data: patient, isLoading: isLoadingPatient } = useSWR<Patient>(API_PATHS.PATIENTS.SHOW.replace(':id', id), async url => {
@@ -41,7 +42,7 @@ export const usePatient = (id: string): usePatientReturnType => {
   });
 
   return {
-    latestData: latestData ? latestData : undefined,
+    latestData: latestData ? new LatestData(latestData) : undefined,
     patient: patient ? new Patient(patient) : undefined,
     isLoading: isLoading || isLoadingPatient,
   }

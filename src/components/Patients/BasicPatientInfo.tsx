@@ -1,3 +1,4 @@
+import Patient from '@/classes/Patient'
 import { Box, Stack, styled, Typography } from '@mui/material'
 
 const StyledPatientInfoBox = styled(Box)({
@@ -39,17 +40,21 @@ const StyledLinkBox = styled(Box)({
   },
 })
 
-const BasicPatientInfo = (): JSX.Element => {
+type Props = {
+  patient: Patient
+}
+
+const BasicPatientInfo = ({ patient }: Props): JSX.Element => {
   return (
     <>
       <StyledPatientInfoBox> 
         <Stack>
           <Typography >Name</Typography>
-          <Typography variant='h5' fontWeight='bold'>Peter Janoš</Typography>
+          <Typography variant='h5' fontWeight='bold'>{patient.name}</Typography>
         </Stack>
         <Stack>
           <Typography>Age</Typography>
-          <Typography variant='h5' fontWeight='bold'>21</Typography>
+          <Typography variant='h5' fontWeight='bold'>{patient.age}</Typography>
         </Stack>
       </StyledPatientInfoBox>
 

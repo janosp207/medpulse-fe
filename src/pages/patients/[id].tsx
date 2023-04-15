@@ -11,7 +11,7 @@ const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} />
-      <PatientInfo />
+      <PatientInfo patient={patient} latestData={latestData} />
     </>
   )
 }

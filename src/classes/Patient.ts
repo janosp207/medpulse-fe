@@ -10,10 +10,12 @@ export default class Patient {
   }
 
   get age(): number {
-    const today = new Date()
-    const birthDate = new Date(this.date_of_birth)
-    const age = today.getFullYear() - birthDate.getFullYear()
-    
-    return age
+    const dob = new Date(this.date_of_birth);
+    const now = new Date();
+
+    const diff = now.getTime() - dob.getTime();
+    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+
+    return age;
   }
 }
