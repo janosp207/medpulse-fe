@@ -8,6 +8,7 @@ const PATHS = {
 const API_PATHS = {
   PATIENTS: {
     GET: '/api/doctor/patients',
+    SHOW: '/api/patients/:id',
   }
 }
 
