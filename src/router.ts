@@ -7,7 +7,7 @@ const PATHS = {
 
 const API_PATHS = {
   PATIENTS: {
-    GET: '/api/doctor/patients',
+    GET: '/api/patients',
     SHOW: '/api/patients/:id',
     LATEST_DATA: '/api/patients/:id/latestdata',
   }
