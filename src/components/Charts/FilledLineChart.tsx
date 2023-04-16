@@ -22,6 +22,18 @@ const FilledLineChart = ({ datasets, title }: Props): JSX.Element => {
         text: title,
       },
     },
+    scales: {
+      'y-axis-1': {
+        type: 'linear' as const,
+        display: true,
+        position: 'left' as const,
+      },
+      'y-axis-2': {
+        type: 'linear' as const,
+        display: true,
+        position: 'right' as const,
+      },
+    },
   };
 
   return (

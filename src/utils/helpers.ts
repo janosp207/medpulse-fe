@@ -31,7 +31,6 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       })),
       borderColor: '#FF0000',
       backgroundColor: '#FF0000',
-      fill: false,
       yAxisID: 'y-axis-1',
       //conditionally change color
       pointBackgroundColor: weightData.map((weight: WeightData) => {
@@ -59,7 +58,6 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       })),
       borderColor: '#0000FF',
       backgroundColor: '#0000FF',
-      fill: false,
       yAxisID: 'y-axis-2',
       //conditionally change color
       pointBackgroundColor: fatRatioData.map((bodyFat: BodyFatData) => {
