@@ -26,10 +26,10 @@ const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.El
         <Link href={PATHS.HOME}>
           <Button sx={{ width: 50, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}><Home/></Button>
         </Link>
-        <Button sx={{ width: 250, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}>Add threshold values</Button>
+        <Button sx={{ width: 250, height: 40, color: 'black', backgroundColor: '#D1DFE5' }} onClick={() => setOpenDialog(true)}>Add threshold values</Button>
       </Box>
 
-      <LimitsDialog patient={patient} open={true} onClose={() => setOpenDialog(false)}/>
+      <LimitsDialog patient={patient} open={openDialog} onClose={() => setOpenDialog(false)}/>
     </Box>
   )
 }
