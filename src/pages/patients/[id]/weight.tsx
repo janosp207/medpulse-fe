@@ -1,4 +1,4 @@
-import FilledLineChart from '@/components/Charts/filledLineChart'
+import FilledLineChart from '@/components/Charts/FilledLineChart'
 import Header from '@/components/Patients/Header'
 import { usePatient } from '@/hooks/patients'
 import { useWeightData } from '@/hooks/weight'
