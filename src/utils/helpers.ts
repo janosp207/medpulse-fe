@@ -19,6 +19,8 @@ export const formatDate = (date: string | number): string => {
 
 export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[] ): any[] => {
   const datasets = []
+  const tempMaxWeight = 75
+  const tempMaxBodyFat = 17
 
   if(weightData) {
     datasets.push({
@@ -31,6 +33,20 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       backgroundColor: '#FF0000',
       fill: false,
       yAxisID: 'y-axis-1',
+      //conditionally change color
+      pointBackgroundColor: weightData.map((weight: WeightData) => {
+        if (weight.value > tempMaxWeight) {
+          return '#FFD700';
+        }
+        return '#FF0000';
+      }),
+      //change point size
+      pointRadius: weightData.map((weight: WeightData) => {
+        if (weight.value > tempMaxWeight) {
+          return 6;
+        }
+        return 3;
+      }),
     })
   }
 
@@ -45,6 +61,20 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       backgroundColor: '#0000FF',
       fill: false,
       yAxisID: 'y-axis-2',
+      //conditionally change color
+      pointBackgroundColor: fatRatioData.map((bodyFat: BodyFatData) => {
+        if (bodyFat.value > tempMaxBodyFat) {
+          return '#D700FF';
+        }
+        return '#0000FF';
+      }),
+      //change point size
+      pointRadius: fatRatioData.map((bodyFat: BodyFatData) => {
+        if (bodyFat.value > tempMaxBodyFat) {
+          return 6;
+        }
+        return 3;
+      }),
     })
   }
 
