@@ -1,22 +1,36 @@
-import { MeasurementType, WeightData } from '@/classes/LatestData';
+import { BodyFatData, WeightData } from '@/classes/LatestData';
 import { API_PATHS } from '@/router';
 import axios from '@/utils/axios';
 import useSWR from 'swr';
 
 type usePatientsReturnType = {
-  weightData: WeightData[] | undefined
+  weightData?: WeightData[] | undefined
+  fatRatioData?: BodyFatData[] | undefined
   isLoading: boolean
 }
 
-export const useWeightData = (id: string): usePatientsReturnType => {
-  const { data: weightData, isLoading } = useSWR<WeightData[]>(API_PATHS.PATIENTS.MEASUREMENTS.replace(':id', id).replace(':type', `${MeasurementType.Weight}`), async url => {
+type WeightDataSWR = {
+  weightData?: WeightData[]
+  fatRatioData?: BodyFatData[]
+}
+
+export const useWeightData = (id: string, types: number[]): usePatientsReturnType => {
+  let stringTypes = ''
+  types.forEach((type, index) => {
+    stringTypes += `${type}`
+    if (index !== types.length - 1) {
+      stringTypes += ','
+    }
+  })
+  const { data, isLoading } = useSWR<WeightDataSWR>(API_PATHS.PATIENTS.MEASUREMENTS.replace(':id', id).replace(':type', stringTypes), async url => {
     const { data } = await axios.get(url);
 
     return data;
   });
 
   return {
-    weightData: weightData ? weightData.map((weight: any) => new WeightData(weight)) : undefined,
+    weightData: data?.weightData ? data?.weightData.map((weight: any) => new WeightData(weight)) : undefined,
+    fatRatioData: data?.fatRatioData ? data?.fatRatioData.map((fatRatio: any) => new BodyFatData(fatRatio)) : undefined,
     isLoading: isLoading,
   }
 }

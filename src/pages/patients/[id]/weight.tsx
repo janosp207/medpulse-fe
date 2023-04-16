@@ -1,19 +1,24 @@
-import FilledLineChart from '@/components/Charts/FilledLineChart'
+import { MeasurementType } from '@/classes/LatestData'
 import Header from '@/components/Patients/Header'
-import { usePatient } from '@/hooks/patients'
+import WeightCharts from '@/components/Weight/WeightCharts'
 import { useWeightData } from '@/hooks/measurements'
+import { usePatient } from '@/hooks/patients'
+import { prepareWeightDatasets } from '@/utils/helpers'
 import { Typography } from '@mui/material'
 
 const PatientWeight = ({ id }: {id: string}): JSX.Element => {
-  const { patient } = usePatient(id)
-  const { weightData } = useWeightData(id)
+  const { patient, isLoading: isPatientLoading } = usePatient(id)
+  const { weightData, fatRatioData, isLoading } = useWeightData(id, [MeasurementType.Weight, MeasurementType.FatRatio])
 
-  if (!patient || !weightData) return <Typography>Loading...</Typography>
+  if (isLoading || isPatientLoading) return <Typography>Loading...</Typography>
+  if (!patient) return <Typography>Could not find patient</Typography>
+
+  const datasets = prepareWeightDatasets(weightData, fatRatioData)
 
   return (
     <>
       <Header patient={patient} title={'Weight data'}/>
-      <FilledLineChart data={weightData} label={'Weight data'} unit={'kg'} />
+      <WeightCharts datasets={datasets}/>
     </>
   )
 }

@@ -1,24 +1,14 @@
-import { formatDate } from '@/utils/helpers';
 import { Box } from '@mui/material';
 import { Line } from 'react-chartjs-2';
 
 type Props = {
-  data: any
-  label: string
-  unit: string
+  datasets: any[]
+  title: string
 }
 
-const FilledLineChart = ({ data, label, unit }: Props): JSX.Element => {
+const FilledLineChart = ({ datasets, title }: Props): JSX.Element => {
   const chartData = {
-    labels: data.map((d: any) => formatDate(d.date)),
-    datasets: [
-      {
-        label: `${label} (${unit})`,
-        data: data.map((d: any) => d.value),
-        borderColor: 'rgb(255, 99, 132)',
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-      },
-    ],
+    datasets
   };
 
   const options = {
@@ -29,7 +19,7 @@ const FilledLineChart = ({ data, label, unit }: Props): JSX.Element => {
       },
       title: {
         display: true,
-        text: 'Chart.js Line Chart',
+        text: title,
       },
     },
   };
