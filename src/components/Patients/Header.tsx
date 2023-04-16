@@ -4,8 +4,11 @@ import { Home } from '@mui/icons-material'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import LimitsDialog from './LimitsDialog'
 const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.Element => {
   const router = useRouter();
+  const [openDialog, setOpenDialog] = useState(false);
 
   const goBack = () => {
     router.back();
@@ -23,9 +26,10 @@ const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.El
         <Link href={PATHS.HOME}>
           <Button sx={{ width: 50, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}><Home/></Button>
         </Link>
-        <Button sx={{ width: 150, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}>Add limit values</Button>
+        <Button sx={{ width: 250, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}>Add threshold values</Button>
       </Box>
 
+      <LimitsDialog patient={patient} open={true} onClose={() => setOpenDialog(false)}/>
     </Box>
   )
 }

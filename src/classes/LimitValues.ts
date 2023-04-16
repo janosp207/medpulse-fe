@@ -1,0 +1,25 @@
+export default class LimitValues {
+  weight = 0;
+  fatRatio = 0;
+  bmi = 0;
+  systolicMax = 0;
+  diastolicMax = 0;
+  systolicMin = 0;
+  diastolicMin = 0;
+  bloodOxygenMax = 0;
+  bloodOxygenMin = 0;
+  sleepDurationMin = 0;
+
+  constructor(data: Partial<LimitValues>) {
+    this.weight = data.weight ?? this.weight;
+    this.fatRatio = data.fatRatio ?? this.fatRatio;
+    this.bmi = data.bmi ?? this.bmi;
+    this.systolicMax = data.systolicMax ?? this.systolicMax;
+    this.diastolicMax = data.diastolicMax ?? this.diastolicMax;
+    this.systolicMin = data.systolicMin ?? this.systolicMin;
+    this.diastolicMin = data.diastolicMin ?? this.diastolicMin;
+    this.bloodOxygenMax = data.bloodOxygenMax ?? this.bloodOxygenMax;
+    this.bloodOxygenMin = data.bloodOxygenMin ?? this.bloodOxygenMin;
+    this.sleepDurationMin = data.sleepDurationMin ?? this.sleepDurationMin;
+  }
+}

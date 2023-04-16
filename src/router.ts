@@ -12,6 +12,7 @@ const API_PATHS = {
     SHOW: '/api/patients/:id',
     LATEST_DATA: '/api/patients/:id/latestdata',
     MEASUREMENTS: '/api/patients/:id/measurements/:type',
+    LIMIT_VALUES: '/api/patients/:id/limitvalues',
   }
 }
 

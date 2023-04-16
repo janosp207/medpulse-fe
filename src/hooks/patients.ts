@@ -1,4 +1,5 @@
 import LatestData from '@/classes/LatestData'
+import LimitValues from '@/classes/LimitValues'
 import Patient from '@/classes/Patient'
 import { API_PATHS } from '@/router'
 import axios from '@/utils/axios'
@@ -55,5 +56,32 @@ export const useLatestData = (id: string): useLatestDataReturnType => {
   return {
     latestData: latestData ? new LatestData(latestData) : undefined,
     isLoading: isLoading,
+  }
+}
+
+type useLimitValuesReturnType = {
+  limitValues: LimitValues | undefined
+  store: (newLimitValues: LimitValues) => Promise<void>
+  isLoading: boolean
+}
+
+
+export const useLimitValues = (id: string): useLimitValuesReturnType => {
+  const { data: limitValues, isLoading, mutate } = useSWR(API_PATHS.PATIENTS.LIMIT_VALUES.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+  const store = async (newLimitValues: LimitValues): Promise<void> => {
+    await axios.post(API_PATHS.PATIENTS.LIMIT_VALUES.replace(':id', id), newLimitValues).then(() => {
+      mutate(newLimitValues)
+    })
+  }
+
+  return {
+    limitValues: limitValues ? new LimitValues(limitValues) : undefined,
+    store,
+    isLoading,
   }
 }
