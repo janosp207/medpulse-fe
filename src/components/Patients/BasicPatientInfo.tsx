@@ -1,6 +1,8 @@
 import LatestData from '@/classes/LatestData'
 import Patient from '@/classes/Patient'
-import { Box, Stack, styled, Typography } from '@mui/material'
+import { PATHS } from '@/router'
+import { Box, Button, Stack, styled, Typography } from '@mui/material'
+import Link from 'next/link'
 
 const StyledPatientInfoBox = styled(Box)({
   display: 'flex',
@@ -26,19 +28,18 @@ const StyledPatientWeightBox = styled(Box)({
   marginTop: 40,
 })
 
-const StyledLinkBox = styled(Box)({
+const StyledInfoButton = styled(Button)({
   paddingTop: 10,
   paddingBottom: 10,
   marginTop: 10,
   backgroundColor: '#7B949F',
   width: '100%',
   borderRadius: '0 0 20px 20px',
-  //lighten up on hover
+  color: 'black',
   '&:hover': {
     backgroundColor: '#7B949F',
-    opacity: 0.8,
-    cursor: 'pointer'
-  },
+  }
+
 })
 
 type Props = {
@@ -71,12 +72,14 @@ const BasicPatientInfo = ({ patient, latestData }: Props): JSX.Element => {
         <Stack>
           <Typography mt={3} mb={3} variant="h3" fontWeight='bold'>{latestWeight.value} Kg</Typography>
           <Typography >BMI: {bmi}</Typography>
-          <Typography >Fat ratio:{latestFatRatio.value}%</Typography>
+          <Typography >Fat ratio: {latestFatRatio.value}%</Typography>
         </Stack>
+        <Link href={PATHS.PATIENT.WEIGHT.replace(':id', `${patient.user_id}`)} style={{ width: '100%' }}>
+          <StyledInfoButton>
+            <Typography fontWeight='bold'>More info</Typography>
+          </StyledInfoButton>
+        </Link>
 
-        <StyledLinkBox>
-          <Typography fontWeight='bold'>More info</Typography>
-        </StyledLinkBox>
       </StyledPatientWeightBox>
 
     </>

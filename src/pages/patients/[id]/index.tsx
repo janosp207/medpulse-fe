@@ -1,16 +1,17 @@
 import Header from '@/components/Patients/Header'
 import PatientInfo from '@/components/Patients/PatientInfo'
-import { usePatient } from '@/hooks/patients'
+import { useLatestData, usePatient } from '@/hooks/patients'
 import { Typography } from '@mui/material'
 
 const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
-  const { latestData, patient } = usePatient(id)
+  const { patient } = usePatient(id)
+  const { latestData } = useLatestData(id)
 
   if (!latestData || !patient) return <Typography>Loading...</Typography>
 
   return (
     <>
-      <Header patient={patient} />
+      <Header patient={patient} title={'Latest data dashboard'} />
       <PatientInfo patient={patient} latestData={latestData} />
     </>
   )

@@ -23,18 +23,11 @@ export const usePatients = (): usePatientsReturnType => {
 }
 
 type usePatientReturnType = {
-  latestData: LatestData | undefined
   patient: Patient | undefined
   isLoading: boolean
 }
 
 export const usePatient = (id: string): usePatientReturnType => {
-  const { data: latestData, isLoading } = useSWR<LatestData>(API_PATHS.PATIENTS.LATEST_DATA.replace(':id', id), async url => {
-    const { data } = await axios.get(url);
-
-    return data.body;
-  });
-
   const { data: patient, isLoading: isLoadingPatient } = useSWR<Patient>(API_PATHS.PATIENTS.SHOW.replace(':id', id), async url => {
     const { data } = await axios.get(url);
 
@@ -42,8 +35,25 @@ export const usePatient = (id: string): usePatientReturnType => {
   });
 
   return {
-    latestData: latestData ? new LatestData(latestData) : undefined,
     patient: patient ? new Patient(patient) : undefined,
-    isLoading: isLoading || isLoadingPatient,
+    isLoading: isLoadingPatient,
+  }
+}
+
+type useLatestDataReturnType = {
+  latestData: LatestData | undefined
+  isLoading: boolean
+}
+
+export const useLatestData = (id: string): useLatestDataReturnType => {
+  const { data: latestData, isLoading } = useSWR<LatestData>(API_PATHS.PATIENTS.LATEST_DATA.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data.body;
+  });
+
+  return {
+    latestData: latestData ? new LatestData(latestData) : undefined,
+    isLoading: isLoading,
   }
 }

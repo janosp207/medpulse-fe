@@ -1,6 +1,6 @@
 import { formatDate } from '@/utils/helpers'
 
-class ActivityData {
+export class ActivityData {
   calories = 0
   steps = 0
   distance = 0
@@ -13,26 +13,26 @@ class ActivityData {
     this.createdAt = data.createdAt ?? this.createdAt
   }
 
-  get formattedDate() {
+  get formattedDate():string {
     return formatDate(this.createdAt)
   }
 
-  get formattedCalories() {
+  get formattedCalories():string {
     //round to two decimal
     this.calories = Math.round(this.calories * 100) / 100
     return `${this.calories} kcal`
   }
 
-  get formattedSteps() {
+  get formattedSteps():string {
     return `${this.steps}`
   }
 
-  get formattedDistance() {
+  get formattedDistance():string {
     return `${this.distance} m`
   }
 }
 
-class BloodOxygenData {
+export class BloodOxygenData {
   bloodOxygen = 0
   createdAt = ''
   constructor(data: Partial<BloodOxygenData>) {
@@ -40,16 +40,16 @@ class BloodOxygenData {
     this.createdAt = data.createdAt ?? this.createdAt
   }
 
-  get formattedDate() {
+  get formattedDate():string {
     return formatDate(this.createdAt)
   }
 
-  get formattedBloodOxygen() {
+  get formattedBloodOxygen():string {
     return `${this.bloodOxygen * 100}%`
   }
 }
 
-class BloodPressureData {
+export class BloodPressureData {
   systolic = 0
   diastolic = 0
   createdAt = ''
@@ -60,16 +60,16 @@ class BloodPressureData {
     this.createdAt = data.createdAt ?? this.createdAt
   }
 
-  get formattedDate() {
+  get formattedDate():string {
     return formatDate(this.createdAt)
   }
 
-  get formattedBloodPressure() {
+  get formattedBloodPressure():string {
     return `${this.systolic}/${this.diastolic}`
   }
 }
 
-class WeightData {
+export class WeightData {
   value = 0
   // assign date to createdAt
   date = 0
@@ -79,12 +79,12 @@ class WeightData {
     this.date = data.date ?? this.date
   }
 
-  get formattedDate() {
+  get formattedDate(): string {
     return formatDate(this.date*1000)
   }
 }
 
-class BodyFatData {
+export class BodyFatData {
   value = 0
   // assign date to createdAt
   date = 0
@@ -94,7 +94,7 @@ class BodyFatData {
     this.date = data.date ?? this.date
   }
 
-  get formattedDate() {
+  get formattedDate(): string {
     return formatDate(this.date*1000)
   }
 }
