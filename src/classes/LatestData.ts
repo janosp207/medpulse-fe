@@ -1,5 +1,11 @@
 import { formatDate } from '@/utils/helpers'
 
+export enum MeasurementType {
+  Weight = 1,
+  Height = 4,
+  FatRatio = 6,
+}
+
 export class ActivityData {
   calories = 0
   steps = 0

@@ -1,4 +1,4 @@
-import { WeightData } from '@/classes/LatestData';
+import { MeasurementType, WeightData } from '@/classes/LatestData';
 import { API_PATHS } from '@/router';
 import axios from '@/utils/axios';
 import useSWR from 'swr';
@@ -9,7 +9,7 @@ type usePatientsReturnType = {
 }
 
 export const useWeightData = (id: string): usePatientsReturnType => {
-  const { data: weightData, isLoading } = useSWR<WeightData[]>(API_PATHS.PATIENTS.WEIGHT.replace(':id', id), async url => {
+  const { data: weightData, isLoading } = useSWR<WeightData[]>(API_PATHS.PATIENTS.MEASUREMENTS.replace(':id', id).replace(':type', `${MeasurementType.Weight}`), async url => {
     const { data } = await axios.get(url);
 
     return data;

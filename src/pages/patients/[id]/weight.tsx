@@ -1,7 +1,7 @@
 import FilledLineChart from '@/components/Charts/FilledLineChart'
 import Header from '@/components/Patients/Header'
 import { usePatient } from '@/hooks/patients'
-import { useWeightData } from '@/hooks/weight'
+import { useWeightData } from '@/hooks/measurements'
 import { Typography } from '@mui/material'
 
 const PatientWeight = ({ id }: {id: string}): JSX.Element => {
