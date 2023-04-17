@@ -1,17 +1,20 @@
-import { BodyFatData, WeightData } from '@/classes/LatestData';
+import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import { API_PATHS } from '@/router';
 import axios from '@/utils/axios';
 import useSWR from 'swr';
 
+
 type usePatientsReturnType = {
   weightData?: WeightData[] | undefined
   fatRatioData?: BodyFatData[] | undefined
+  heightData ?: HeightData | undefined
   isLoading: boolean
 }
 
 type WeightDataSWR = {
   weightData?: WeightData[]
   fatRatioData?: BodyFatData[]
+  heightData?: HeightData[]
 }
 
 export const useWeightData = (id: string, types: number[]): usePatientsReturnType => {
@@ -31,6 +34,7 @@ export const useWeightData = (id: string, types: number[]): usePatientsReturnTyp
   return {
     weightData: data?.weightData ? data?.weightData.map((weight: any) => new WeightData(weight)) : undefined,
     fatRatioData: data?.fatRatioData ? data?.fatRatioData.map((fatRatio: any) => new BodyFatData(fatRatio)) : undefined,
+    heightData: data?.heightData ? new HeightData(data?.heightData[0]) : undefined,
     isLoading: isLoading,
   }
 }

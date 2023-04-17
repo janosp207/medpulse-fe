@@ -18,12 +18,11 @@ export const formatDate = (date: string | number): string => {
   return `${day}.${month}.${year}`;
 };
 
-export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[], limitValues?: LimitValues ): any[] => {
+export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[], heightData, limitValues?: LimitValues ): any[] => {
   const datasets = []
   const maxWeight = limitValues?.weight || 0;
   const maxBodyFat = limitValues?.fatRatio || 0;
-
-  console.log(limitValues)
+  const maxBMI = limitValues?.bmi || 0;
 
   if(weightData) {
     datasets.push({
@@ -79,6 +78,32 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
     })
   }
 
+  if(heightData && weightData) {
+    datasets.push({
+      label: 'BMI',
+      data: weightData.map((weight: WeightData) => ({
+        x: formatDate(weight.date),
+        y: weight.calculateBMI(heightData.value),
+      })),
+      borderColor: '#00FF00',
+      backgroundColor: '#00FF00',
+      yAxisID: 'y-axis-3',
+      //conditionally change color
+      pointBackgroundColor: weightData.map((weight: WeightData) => {
+        if (weight.calculateBMI(heightData.value) > maxBMI && maxBMI !== 0) {
+          return '#FFD700';
+        }
+        return '#00FF00';
+      }),
+      //change point size
+      pointRadius: weightData.map((weight: WeightData) => {
+        if (weight.calculateBMI(heightData.value) > maxBMI && maxBMI !== 0) {
+          return 6;
+        }
+        return 3;
+      }),
+    })
+  }
 
   return datasets;
 }

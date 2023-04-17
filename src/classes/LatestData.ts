@@ -77,7 +77,6 @@ export class BloodPressureData {
 
 export class WeightData {
   value = 0
-  // assign date to createdAt
   date = 0
 
   constructor(data: Partial<WeightData>) {
@@ -88,6 +87,10 @@ export class WeightData {
   get formattedDate(): string {
     return formatDate(this.date*1000)
   }
+
+  calculateBMI(height: number): number {
+    return parseFloat((this.value / (height * height)).toFixed(2))
+  }
 }
 
 export class BodyFatData {
@@ -96,6 +99,20 @@ export class BodyFatData {
   date = 0
   
   constructor(data: Partial<BodyFatData>) {
+    this.value = data.value ?? this.value
+    this.date = data.date ?? this.date
+  }
+
+  get formattedDate(): string {
+    return formatDate(this.date*1000)
+  }
+}
+
+export class HeightData {
+  value = 0
+  date = 0
+
+  constructor(data: Partial<HeightData>) {
     this.value = data.value ?? this.value
     this.date = data.date ?? this.date
   }

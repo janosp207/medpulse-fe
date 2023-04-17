@@ -8,13 +8,13 @@ import { Typography } from '@mui/material'
 
 const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   const { patient, isLoading: isPatientLoading } = usePatient(id)
-  const { weightData, fatRatioData, isLoading } = useWeightData(id, [MeasurementType.Weight, MeasurementType.FatRatio])
+  const { weightData, fatRatioData, heightData, isLoading } = useWeightData(id, [MeasurementType.Weight, MeasurementType.FatRatio, MeasurementType.Height])
   const { limitValues, isLoading: isLimitValuesLoading } = useLimitValues(id)
 
   if (isLoading || isPatientLoading || isLimitValuesLoading) return <Typography>Loading...</Typography>
   if (!patient) return <Typography>Could not find patient</Typography>
 
-  const datasets = prepareWeightDatasets(weightData, fatRatioData, limitValues)
+  const datasets = prepareWeightDatasets(weightData, fatRatioData, heightData, limitValues)
 
   return (
     <>
