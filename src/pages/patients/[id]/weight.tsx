@@ -19,7 +19,7 @@ const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} title={'Weight data'}/>
-      <WeightCharts datasets={datasets} />
+      <WeightCharts datasets={datasets} limitValues={limitValues}/>
     </>
   )
 }
