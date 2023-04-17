@@ -75,7 +75,7 @@ export const useLimitValues = (id: string): useLimitValuesReturnType => {
 
   const store = async (newLimitValues: LimitValues): Promise<void> => {
     await axios.post(API_PATHS.PATIENTS.LIMIT_VALUES.replace(':id', id), newLimitValues).then(() => {
-      mutate(newLimitValues)
+      mutate(new LimitValues(newLimitValues), { revalidate: false })
     })
   }
 

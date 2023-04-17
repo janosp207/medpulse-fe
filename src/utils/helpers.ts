@@ -1,4 +1,5 @@
 import { BodyFatData, WeightData } from '@/classes/LatestData';
+import LimitValues from '@/classes/LimitValues';
 
 export const formatDate = (date: string | number): string => {
   // if is number, check if is in seconds or milliseconds
@@ -17,10 +18,12 @@ export const formatDate = (date: string | number): string => {
   return `${day}.${month}.${year}`;
 };
 
-export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[] ): any[] => {
+export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[], limitValues?: LimitValues ): any[] => {
   const datasets = []
-  const tempMaxWeight = 75
-  const tempMaxBodyFat = 17
+  const maxWeight = limitValues?.weight || 0;
+  const maxBodyFat = limitValues?.fatRatio || 0;
+
+  console.log(limitValues)
 
   if(weightData) {
     datasets.push({
@@ -34,14 +37,14 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       yAxisID: 'y-axis-1',
       //conditionally change color
       pointBackgroundColor: weightData.map((weight: WeightData) => {
-        if (weight.value > tempMaxWeight) {
+        if (weight.value > maxWeight && maxWeight !== 0) {
           return '#FFD700';
         }
         return '#FF0000';
       }),
       //change point size
       pointRadius: weightData.map((weight: WeightData) => {
-        if (weight.value > tempMaxWeight) {
+        if (weight.value > maxWeight && maxWeight !== 0) {
           return 6;
         }
         return 3;
@@ -61,14 +64,14 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       yAxisID: 'y-axis-2',
       //conditionally change color
       pointBackgroundColor: fatRatioData.map((bodyFat: BodyFatData) => {
-        if (bodyFat.value > tempMaxBodyFat) {
+        if (bodyFat.value > maxBodyFat && maxBodyFat !== 0) {
           return '#D700FF';
         }
         return '#0000FF';
       }),
       //change point size
       pointRadius: fatRatioData.map((bodyFat: BodyFatData) => {
-        if (bodyFat.value > tempMaxBodyFat) {
+        if (bodyFat.value > maxBodyFat && maxBodyFat !== 0) {
           return 6;
         }
         return 3;

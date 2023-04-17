@@ -34,6 +34,10 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
   if (isLoading) {
     return <>Loading...</>;
   }
+
+  if (!limitValues) {
+    return <>Something went wrong</>;
+  }
   
   const inputsList = [
     {
@@ -78,7 +82,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
     }
   ]
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const data = inputsList.reduce((acc, input) => {
       const value = input.ref.current?.value;
       if (value) {
@@ -86,9 +90,9 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
       }
       return acc;
     }, {} as { [key: string]: string });
-
-    const limitValues = new LimitValues(data);
-    store(limitValues);
+    const newLimitValues = new LimitValues({ ...limitValues, ...data });
+    await store(newLimitValues);
+    onClose();
   }
 
   return (
@@ -103,6 +107,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="Weight"
+              defaultValue={limitValues.weight}
               name="weight"
               fullWidth
               variant="outlined"
@@ -112,6 +117,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="Fat ratio"
+              defaultValue={limitValues.fatRatio}
               name="fatRatio"
               fullWidth
               variant="outlined"
@@ -121,6 +127,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="BMI"
+              defaultValue={limitValues.bmi}
               name="bmi"
               fullWidth
               variant="outlined"
@@ -136,6 +143,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
                 autoFocus
                 margin="dense"
                 label="Systolic max"
+                defaultValue={limitValues.systolicMax}
                 name="systolicMax"
                 fullWidth
                 variant="outlined"
@@ -146,6 +154,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
                 autoFocus
                 margin="dense"
                 label="Diastolic max"
+                defaultValue={limitValues.diastolicMax}
                 name="diastolicMax"
                 fullWidth
                 variant="outlined"
@@ -158,6 +167,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
                 autoFocus
                 margin="dense"
                 label="Systolic min"
+                defaultValue={limitValues.systolicMin}
                 name="systolicMin"
                 fullWidth
                 variant="outlined"
@@ -168,6 +178,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
                 autoFocus
                 margin="dense"
                 label="Diastolic min"
+                defaultValue={limitValues.diastolicMin}
                 name="diastolicMin"
                 fullWidth
                 variant="outlined"
@@ -178,6 +189,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="Blood oxygen max"
+              defaultValue={limitValues.bloodOxygenMax}
               name="bloodOxygenMax"
               fullWidth
               variant="outlined"
@@ -187,6 +199,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="Blood oxygen min"
+              defaultValue={limitValues.bloodOxygenMin}
               name="bloodOxygenMin"
               fullWidth
               variant="outlined"
@@ -200,6 +213,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               autoFocus
               margin="dense"
               label="Sleep duration"
+              defaultValue={limitValues.sleepDurationMin}
               name="sleepDuration"
               fullWidth
               variant="outlined"

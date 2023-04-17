@@ -2,23 +2,24 @@ import { MeasurementType } from '@/classes/LatestData'
 import Header from '@/components/Patients/Header'
 import WeightCharts from '@/components/Weight/WeightCharts'
 import { useWeightData } from '@/hooks/measurements'
-import { usePatient } from '@/hooks/patients'
+import { useLimitValues, usePatient } from '@/hooks/patients'
 import { prepareWeightDatasets } from '@/utils/helpers'
 import { Typography } from '@mui/material'
 
 const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   const { patient, isLoading: isPatientLoading } = usePatient(id)
   const { weightData, fatRatioData, isLoading } = useWeightData(id, [MeasurementType.Weight, MeasurementType.FatRatio])
+  const { limitValues, isLoading: isLimitValuesLoading } = useLimitValues(id)
 
-  if (isLoading || isPatientLoading) return <Typography>Loading...</Typography>
+  if (isLoading || isPatientLoading || isLimitValuesLoading) return <Typography>Loading...</Typography>
   if (!patient) return <Typography>Could not find patient</Typography>
 
-  const datasets = prepareWeightDatasets(weightData, fatRatioData)
+  const datasets = prepareWeightDatasets(weightData, fatRatioData, limitValues)
 
   return (
     <>
       <Header patient={patient} title={'Weight data'}/>
-      <WeightCharts datasets={datasets}/>
+      <WeightCharts datasets={datasets} />
     </>
   )
 }
