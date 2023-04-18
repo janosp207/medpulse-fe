@@ -9,7 +9,7 @@ import {
   LinearScale,
   PointElement,
   Title,
-  Tooltip
+  Tooltip,
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import type { AppProps } from 'next/app';
@@ -23,7 +23,7 @@ ChartJS.register(
   Tooltip,
   Legend,
   annotationPlugin,
-  BarElement
+  BarElement,
 );
 
 

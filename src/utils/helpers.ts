@@ -3,13 +3,6 @@ import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 import { SleepData } from '@/classes/SleepLog';
 
-const SleepStates = {
-  0: 'Awake',
-  1: 'Light Sleep',
-  2: 'Deep Sleep',
-  3: 'REM',
-}
-
 export const formatDate = (date: string | number): string => {
   // if is number, check if is in seconds or milliseconds
   if (typeof date === 'number') {
@@ -25,6 +18,20 @@ export const formatDate = (date: string | number): string => {
   const year = dateObj.getFullYear();
 
   return `${day}.${month}.${year}`;
+};
+
+export const getTimeFromTimestamp = (timestamp: number): string => {
+  const date = new Date(timestamp * 1000);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  //check if AM or PM, ad 0 if needed
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  const hours12 = hours % 12;
+  const hours12Str = hours12 < 10 ? `0${hours12}` : hours12;
+  const minutesStr = minutes < 10 ? `0${minutes}` : minutes;
+
+  return `${hours12Str}:${minutesStr} ${ampm}`;
 };
 
 type Props = {
@@ -130,45 +137,32 @@ export const prepareWeightDatasets = ({ weightData, fatRatioData, heightData, li
 }
 
 export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
-  const labels = sleepData.map((sleep: SleepData) => sleep.startdate);
-  const colors = {
-    0: '#D1DFE5',
-    1: '#7B949F',
-    2: '#3D1E6E',
-  }
+  //get array of all heart rate and their timestamps from sleepData
+  const heartRates = [] as any;
 
-  const datasets = []
+  sleepData.forEach((sleep: SleepData) => {
+    sleep.heartRates.forEach((heartRate: any) => {
+      heartRates.push({
+        x: heartRate.timestamp,
+        y: heartRate.hr,
+      })
+    })
+  })
 
-  //group data from sleepData by SleepStates
-  const sleepStateData = sleepData.reduce((acc: any, sleep: SleepData) => {
-    const { state } = sleep;
-    if (!acc[state]) {
-      acc[state] = [];
-    }
-    acc[state].push(sleep);
-    return acc;
-  }, {});
+  //sort heart rates by timestamp
+  heartRates.sort((a: any, b: any) => {
+    return a.x - b.x;
+  })
+  
+  //create dataset for heart rate
+  const heartRatesDataset = [{
+    label: 'Heart rate',
+    data: heartRates,
+    borderColor: '#FF0000',
+    backgroundColor: '#FF0000',
+    yAxisID: 'y-axis-1',
+    xAxisID: 'x-axis-1',
+  }]
 
-  //create dataset for each SleepState
-  for (const state in sleepStateData) {
-    const data = sleepStateData[state].map((sleep: SleepData) => ({
-      x: sleep.startdate,
-      y: sleep.state,
-    }));
-
-    datasets.push({
-      label: SleepStates[state as keyof object],
-      data,
-      borderColor: colors[state as keyof object],
-      backgroundColor: colors[state as keyof object],
-      yAxisID: 'y-axis-1',
-      xAxisID: 'x-axis-1',
-      barThickness: 'flex',
-    });
-  }
-
-  return {
-    labels,
-    datasets,
-  }
+  return heartRatesDataset;
 }

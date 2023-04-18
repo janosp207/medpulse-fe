@@ -11,17 +11,29 @@ type AdditionalProps = {
   [key: string]: any
 }
 
+export class HeartRateData {
+  hr = 0
+  timestamp = 0
+
+  constructor(data: Partial<HeartRateData & AdditionalProps>) {
+    this.hr = data.hr ?? this.hr;
+    this.timestamp = data.timestamp ?? this.timestamp;
+  }
+}
+
 export class SleepData {
   id = 0
   startdate = 0
   enddate = 0
   state = 0 as SleepStates
+  heartRates: HeartRateData[] = []
 
   constructor(data: Partial<SleepData & AdditionalProps>) {
     this.id = data.id ?? this.id;
     this.startdate = data.startdate ?? this.startdate;
     this.enddate = data.enddate ?? this.enddate;
     this.state = data.state ?? this.state;
+    this.heartRates = data.heart_rates ? data.heart_rates.map((hr: HeartRateData) => new HeartRateData(hr)) : this.heartRates;
   }
 }
 

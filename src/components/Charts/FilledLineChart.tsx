@@ -12,6 +12,7 @@ const FilledLineChart = ({ datasets, title, threshold }: Props): JSX.Element => 
   const chartData = {
     datasets
   };
+  
   const options = {
     responsive: true,
     plugins: {
@@ -31,16 +32,6 @@ const FilledLineChart = ({ datasets, title, threshold }: Props): JSX.Element => 
             value: threshold,
             borderColor: '#000',
             borderWidth: 2,
-          },
-          box1: {
-            type: 'box' as const,
-            xScaleID: 'x-axis-1',
-            yScaleID: 'y-axis-1',
-            xMin: 0,
-            xMax: 1,
-            yMin: 0,
-            yMax: 0,
-            backgroundColor: 'rgba(0, 0, 0, 0.1)',
           },
         }
       }

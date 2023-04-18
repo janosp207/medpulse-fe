@@ -10,7 +10,6 @@ type Props = {
 
 const WeightCharts = ({ datasets, limitValues }: Props): JSX.Element => {
   const showLimitValues = limitValues !== undefined
-
   return(
     <Box sx={{ display: 'flex', flexDirection: 'row',  gap: 5 }}>
       <Box width={'50%'}>

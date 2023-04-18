@@ -1,4 +1,4 @@
-import MySleepChart from '@/components/Charts/MySleepChart'
+import SleepLineChart from '@/components/Charts/SleepLineChart'
 import Header from '@/components/Patients/Header'
 import { usePatient } from '@/hooks/patients'
 import { useSleep } from '@/hooks/sleep'
@@ -16,7 +16,7 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
   return (
     <>
       <Header patient={patient} title={'Sleep data'}/>
-      <MySleepChart sleepData={sleepData}/>
+      <SleepLineChart sleepData={sleepData}/>
     </>
   )
 }
