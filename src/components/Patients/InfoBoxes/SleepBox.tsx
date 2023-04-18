@@ -59,7 +59,7 @@ const SleepBox = ({ patient }: Props): JSX.Element => {
         </Stack>
       </Box>
 
-      <Link href={PATHS.SLEEP.SHOW.replace(':id', patient.user_id)}>
+      <Link href={PATHS.SLEEP.INDEX.replace(':id', patient.user_id)}>
         <SleepScore>
           <Stack>
             <Typography fontWeight='bold'>15.4.2023</Typography>

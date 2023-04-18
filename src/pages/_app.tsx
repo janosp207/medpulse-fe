@@ -1,6 +1,7 @@
 import '@/styles/globals.css';
 import { Container } from '@mui/material';
 import {
+  BarElement,
   CategoryScale,
   Chart as ChartJS,
   Legend,
@@ -8,7 +9,7 @@ import {
   LinearScale,
   PointElement,
   Title,
-  Tooltip,
+  Tooltip
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import type { AppProps } from 'next/app';
@@ -21,7 +22,8 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  annotationPlugin
+  annotationPlugin,
+  BarElement
 );
 
 

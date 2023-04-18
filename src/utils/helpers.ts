@@ -1,5 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
+import { SleepData } from '@/classes/SleepLog';
+
+const SleepStates = {
+  0: 'Awake',
+  1: 'Light Sleep',
+  2: 'Deep Sleep',
+  3: 'REM',
+}
 
 export const formatDate = (date: string | number): string => {
   // if is number, check if is in seconds or milliseconds
@@ -118,4 +127,48 @@ export const prepareWeightDatasets = ({ weightData, fatRatioData, heightData, li
   }
 
   return datasets;
+}
+
+export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
+  const labels = sleepData.map((sleep: SleepData) => sleep.startdate);
+  const colors = {
+    0: '#D1DFE5',
+    1: '#7B949F',
+    2: '#3D1E6E',
+  }
+
+  const datasets = []
+
+  //group data from sleepData by SleepStates
+  const sleepStateData = sleepData.reduce((acc: any, sleep: SleepData) => {
+    const { state } = sleep;
+    if (!acc[state]) {
+      acc[state] = [];
+    }
+    acc[state].push(sleep);
+    return acc;
+  }, {});
+
+  //create dataset for each SleepState
+  for (const state in sleepStateData) {
+    const data = sleepStateData[state].map((sleep: SleepData) => ({
+      x: sleep.startdate,
+      y: sleep.state,
+    }));
+
+    datasets.push({
+      label: SleepStates[state as keyof object],
+      data,
+      borderColor: colors[state as keyof object],
+      backgroundColor: colors[state as keyof object],
+      yAxisID: 'y-axis-1',
+      xAxisID: 'x-axis-1',
+      barThickness: 'flex',
+    });
+  }
+
+  return {
+    labels,
+    datasets,
+  }
 }

@@ -1,7 +1,28 @@
 import { formatDate } from '@/utils/helpers'
 
+export enum SleepStates {
+  Awake = 0,
+  LightSleep = 1,
+  DeepSleep = 2,
+  REM = 3,
+}
+
 type AdditionalProps = {
   [key: string]: any
+}
+
+export class SleepData {
+  id = 0
+  startdate = 0
+  enddate = 0
+  state = 0 as SleepStates
+
+  constructor(data: Partial<SleepData & AdditionalProps>) {
+    this.id = data.id ?? this.id;
+    this.startdate = data.startdate ?? this.startdate;
+    this.enddate = data.enddate ?? this.enddate;
+    this.state = data.state ?? this.state;
+  }
 }
 
 export default class SleepLog {
