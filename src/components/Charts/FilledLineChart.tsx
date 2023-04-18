@@ -41,11 +41,6 @@ const FilledLineChart = ({ datasets, title, threshold }: Props): JSX.Element => 
         display: true,
         position: 'left' as const,
       },
-      'y-axis-2': {
-        type: 'linear' as const,
-        display: true,
-        position: 'right' as const,
-      },
     },
   };
 
