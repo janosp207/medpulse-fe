@@ -12,7 +12,7 @@ const FilledLineChart = ({ datasets, title, threshold }: Props): JSX.Element => 
   const chartData = {
     datasets
   };
-  
+
   const options = {
     responsive: true,
     plugins: {

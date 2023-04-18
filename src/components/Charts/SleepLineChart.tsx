@@ -1,9 +1,15 @@
 import { SleepData } from '@/classes/SleepLog';
-import { getTimeFromTimestamp, prepareSleepDatasets } from '@/utils/helpers';
+import { getTimeFromTimestamp, prepareAnnotations, prepareSleepDatasets } from '@/utils/helpers';
 import { Box } from '@mui/system';
 import { Line } from 'react-chartjs-2';
 
 const SleepLineChart = ({ sleepData }: { sleepData: SleepData[] }): JSX.Element => {
+  const chartData = {
+    datasets: prepareSleepDatasets(sleepData),
+  }
+
+  const annotations = prepareAnnotations(sleepData);
+
   const options: any = {
     responsive: true,
     plugins: {
@@ -12,10 +18,11 @@ const SleepLineChart = ({ sleepData }: { sleepData: SleepData[] }): JSX.Element 
       },
       title: {
         display: true,
-        text: 'title',
+        text: 'Heart rates',
       },
       annotation: {
         annotations: {
+          ...annotations
         }
       }
     },
@@ -38,10 +45,6 @@ const SleepLineChart = ({ sleepData }: { sleepData: SleepData[] }): JSX.Element 
       },
     },
   };
-
-  const chartData = {
-    datasets: prepareSleepDatasets(sleepData),
-  }
 
   return (
     <Box>

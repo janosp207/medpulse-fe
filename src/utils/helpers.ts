@@ -1,7 +1,14 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
-import { SleepData } from '@/classes/SleepLog';
+import { SleepData, SleepStates } from '@/classes/SleepLog';
+
+const Colors = {
+  [SleepStates.Awake]: 'rgba(255, 0, 0, 0.3)',
+  [SleepStates.LightSleep]: 'rgba(0, 0, 0, 0.3)',
+  [SleepStates.DeepSleep]: 'rgba(0, 0, 255, 0.3)',
+  [SleepStates.REM]: 'rgba(255, 255, 0, 0.3)',
+}
 
 export const formatDate = (date: string | number): string => {
   // if is number, check if is in seconds or milliseconds
@@ -165,4 +172,20 @@ export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
   }]
 
   return heartRatesDataset;
+}
+
+export const prepareAnnotations = (sleepData: SleepData[]): any => {
+  //create box annotations which start at sleepdata start and end at sleepdata end
+  const annotations = [] as any;
+
+  sleepData.forEach((sleep: SleepData) => {
+    annotations.push({
+      type: 'box',
+      xMin: sleep.startdate,
+      xMax: sleep.enddate,
+      backgroundColor: Colors[sleep.state],
+      borderColor: 'rgb(0, 0, 0)',
+    })
+  })
+  return annotations;
 }
