@@ -17,7 +17,7 @@ const PatientInfo = ({ patient, latestData }: Props): JSX.Element => {
           <BasicPatientInfo patient={patient} latestData={latestData}/>
         </Grid>
         <Grid item xs={12} md={8}>
-          <LatestData latestData={latestData}/>
+          <LatestData patient={patient} latestData={latestData}/>
         </Grid>
       </Grid>
     </Box>

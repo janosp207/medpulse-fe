@@ -1,4 +1,5 @@
 import LatestDataType from '@/classes/LatestData'
+import Patient from '@/classes/Patient'
 import { Box, Grid, Typography } from '@mui/material'
 import BigInfoBox from './InfoBoxes/BigInfoBox'
 import SleepBox from './InfoBoxes/SleepBox'
@@ -6,15 +7,15 @@ import SmallInfoBox from './InfoBoxes/SmallInfoBox'
 
 type Props = {
   latestData: LatestDataType
+  patient: Patient
 }
 
-const LatestData = ({ latestData }: Props): JSX.Element => {
+const LatestData = ({ latestData, patient }: Props): JSX.Element => {
   const { latestActivity, latestBloodOxygen, latestBloodPressure } = latestData
 
   return (
     <>
-      <SleepBox />
-
+      <SleepBox patient={patient}/>
       <Box mt={5}>
         <Typography variant='h5' mb={2}>Activity data</Typography>
 

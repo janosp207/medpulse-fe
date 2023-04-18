@@ -1,4 +1,7 @@
-import { Box, Stack, Typography, styled } from '@mui/material';
+import Patient from '@/classes/Patient';
+import { PATHS } from '@/router';
+import { Box, Button, Stack, Typography, styled } from '@mui/material';
+import Link from 'next/link';
 
 const SleepInfoBox = styled(Box)({
   display: 'flex',
@@ -13,7 +16,7 @@ const SleepInfoBox = styled(Box)({
   paddingRight: 10,
 })
 
-const SleepScore = styled(Box)({
+const SleepScore = styled(Button)({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -32,7 +35,11 @@ const SleepScore = styled(Box)({
   },
 })
 
-const SleepBox = (): JSX.Element => {
+type Props = {
+  patient: Patient
+}
+
+const SleepBox = ({ patient }: Props): JSX.Element => {
   return (
     <SleepInfoBox>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
@@ -52,12 +59,15 @@ const SleepBox = (): JSX.Element => {
         </Stack>
       </Box>
 
-      <SleepScore>
-        <Stack>
-          <Typography fontWeight='bold'>15.4.2023</Typography>
-          <Typography fontWeight='bold' variant='h4'>94</Typography>
-        </Stack>
-      </SleepScore>
+      <Link href={PATHS.SLEEP.SHOW.replace(':id', patient.user_id)}>
+        <SleepScore>
+          <Stack>
+            <Typography fontWeight='bold'>15.4.2023</Typography>
+            <Typography fontWeight='bold' variant='h4'>94</Typography>
+          </Stack>
+        </SleepScore>
+      </Link>
+      
     </SleepInfoBox>
   )
 };
