@@ -5,7 +5,8 @@ const PATHS = {
     WEIGHT: '/patients/:id/weight',
   },
   SLEEP: {
-    SHOW: '/patients/:id/sleep',
+    INDEX: '/patients/:id/sleep',
+    SHOW: '/patients/:id/sleep/:sleepId',
   }
 };
 
@@ -18,7 +19,8 @@ const API_PATHS = {
     LIMIT_VALUES: '/api/patients/:id/limitvalues',
   },
   SLEEP: {
-    SHOW: '/api/patients/:id/sleep',
+    INDEX: '/api/patients/:id/sleep', 
+    SHOW: '/api/patients/:id/sleep/:sleepId',
   }
 }
 

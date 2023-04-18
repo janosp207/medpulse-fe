@@ -1,17 +1,28 @@
 import Header from '@/components/Patients/Header'
+import SleepLog from '@/components/Sleep/SleepLog'
 import { usePatient } from '@/hooks/patients'
+import { useSleep } from '@/hooks/sleep'
 import { Typography } from '@mui/material'
+import { Box } from '@mui/system'
 
 const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   const { patient, isLoading: isPatientLoading } = usePatient(id)
+  const { sleepLogs, isLoading: isSleepLoading } = useSleep(id)
 
-  if (isPatientLoading) return <Typography>Loading...</Typography>
+  if (isPatientLoading || isSleepLoading) return <Typography>Loading...</Typography>
 
   if (!patient) return <Typography>Could not find patient</Typography>
+
+  if (!sleepLogs) return <Typography>Could not find sleep logs</Typography>
 
   return (
     <>
       <Header patient={patient} title={'Sleep data'}/>
+      <Box mt={3} sx={{ display: 'flex', flexDirection: 'row' }}>
+        {sleepLogs.map(sleepLog => (
+          <SleepLog sleepLog={sleepLog} key={sleepLog.id} patientId={patient.user_id}/>
+        ))}
+      </Box>
     </>
   )
 }
