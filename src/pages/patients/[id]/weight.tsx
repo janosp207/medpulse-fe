@@ -14,7 +14,7 @@ const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   if (isLoading || isPatientLoading || isLimitValuesLoading) return <Typography>Loading...</Typography>
   if (!patient) return <Typography>Could not find patient</Typography>
 
-  const datasets = prepareWeightDatasets(weightData, fatRatioData, heightData, limitValues)
+  const datasets = prepareWeightDatasets({ weightData, fatRatioData, heightData, limitValues })
 
   return (
     <>

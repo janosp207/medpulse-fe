@@ -1,4 +1,4 @@
-import { BodyFatData, WeightData } from '@/classes/LatestData';
+import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 
 export const formatDate = (date: string | number): string => {
@@ -18,14 +18,26 @@ export const formatDate = (date: string | number): string => {
   return `${day}.${month}.${year}`;
 };
 
-export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: BodyFatData[], heightData, limitValues?: LimitValues ): any[] => {
-  const datasets = []
+type Props = {
+  weightData?: WeightData[];
+  fatRatioData?: BodyFatData[];
+  heightData?: HeightData;
+  limitValues?: LimitValues;
+};
+
+export const prepareWeightDatasets = ({ weightData, fatRatioData, heightData, limitValues }: Props): any => {
+  const datasets = {
+    weightDataset: [] as any,
+    fatRatioDataset: [] as any,
+    bmiDataset: [] as any,
+  }
+
   const maxWeight = limitValues?.weight || 0;
   const maxBodyFat = limitValues?.fatRatio || 0;
   const maxBMI = limitValues?.bmi || 0;
 
   if(weightData) {
-    datasets.push({
+    datasets.weightDataset.push({
       label: 'Weight',
       data: weightData.map((weight: WeightData) => ({
         x: formatDate(weight.date),
@@ -52,7 +64,7 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
   }
 
   if(fatRatioData) {
-    datasets.push( {
+    datasets.fatRatioDataset.push( {
       label: 'Body fat ratio',
       data: fatRatioData.map((fatRatio: BodyFatData) => ({
         x: formatDate(fatRatio.date),
@@ -60,7 +72,7 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       })),
       borderColor: '#0000FF',
       backgroundColor: '#0000FF',
-      yAxisID: 'y-axis-2',
+      yAxisID: 'y-axis-1',
       //conditionally change color
       pointBackgroundColor: fatRatioData.map((bodyFat: BodyFatData) => {
         if (bodyFat.value > maxBodyFat && maxBodyFat !== 0) {
@@ -79,7 +91,7 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
   }
 
   if(heightData && weightData) {
-    datasets.push({
+    datasets.bmiDataset.push({
       label: 'BMI',
       data: weightData.map((weight: WeightData) => ({
         x: formatDate(weight.date),
@@ -87,7 +99,7 @@ export const prepareWeightDatasets = (weightData?: WeightData[], fatRatioData?: 
       })),
       borderColor: '#00FF00',
       backgroundColor: '#00FF00',
-      yAxisID: 'y-axis-3',
+      yAxisID: 'y-axis-1',
       //conditionally change color
       pointBackgroundColor: weightData.map((weight: WeightData) => {
         if (weight.calculateBMI(heightData.value) > maxBMI && maxBMI !== 0) {
