@@ -1,4 +1,4 @@
-import { formatDate } from '@/utils/helpers'
+import { formatDate, getDurationFromTimestamps } from '@/utils/helpers'
 
 export enum SleepStates {
   Awake = 0,
@@ -51,14 +51,7 @@ export default class SleepLog {
   }
 
   get duration(): { hours: number, minutes: number} {
-    const startMs = this.startdate * 1000;
-    const endMs = this.enddate * 1000;
-    const durationInMs = endMs - startMs;
-    const durationInMinutes = Math.floor(durationInMs / (1000 * 60));
-    const hours = Math.floor(durationInMinutes / 60);
-    const minutes = durationInMinutes % 60;
-  
-    return { hours, minutes };
+    return getDurationFromTimestamps(this.startdate, this.enddate)
   }
 
   get formattedDate(): string {

@@ -6,6 +6,10 @@ export enum MeasurementType {
   FatRatio = 6,
 }
 
+type AdditionalProps = {
+  [key: string]: any
+}
+
 export class ActivityData {
   calories = 0
   steps = 0
@@ -108,6 +112,34 @@ export class BodyFatData {
   }
 }
 
+export class SleepSummary {
+  startdate = 0
+  enddate = 0
+  sleepScore = 0
+  totalSleepTime = 0
+  sleepEfficiency = 0
+  hrAverage = 0
+
+  constructor(data: Partial<SleepSummary & AdditionalProps>) {
+    this.startdate = data.startdate ?? this.startdate;
+    this.enddate = data.enddate ?? this.enddate;
+    this.sleepScore = data.sleep_score ?? this.sleepScore;
+    this.totalSleepTime = data.total_sleep_time ?? this.totalSleepTime;
+    this.sleepEfficiency = data.sleep_efficiency ?? this.sleepEfficiency;
+    this.hrAverage = data.hr_average ?? this.hrAverage;
+  }
+
+  get duration(): string {
+    const hours = Math.floor(this.totalSleepTime / 3600);
+    const minutes = Math.floor((this.totalSleepTime % 3600) / 60);
+    return `${hours}h ${minutes}m`;
+  }
+
+  get formattedEfficiency(): string {
+    return `${this.sleepEfficiency*100}%`;
+  }
+}
+
 export class HeightData {
   value = 0
   date = 0
@@ -128,6 +160,7 @@ export default class LatestData{
   latestWeight = new WeightData({})
   latestFatRatio = new BodyFatData({})
   bmi = 0
+  latestSleepSummary = new SleepSummary({})
 
   constructor(data: Partial<LatestData>) {
     this.latestActivity = new ActivityData(data.latestActivity ?? {})
@@ -136,6 +169,7 @@ export default class LatestData{
     this.latestWeight = new WeightData(data.latestWeight ?? {})
     this.latestFatRatio = new BodyFatData(data.latestFatRatio ?? {})
     this.bmi = data.bmi ?? this.bmi
+    this.latestSleepSummary = new SleepSummary(data.latestSleepSummary ?? {})
   }
 
 }

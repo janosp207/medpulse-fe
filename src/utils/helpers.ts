@@ -41,6 +41,17 @@ export const getTimeFromTimestamp = (timestamp: number): string => {
   return `${hours12Str}:${minutesStr} ${ampm}`;
 };
 
+export const getDurationFromTimestamps = (startdate: number, enddate: number): {hours: number, minutes: number} => {
+  const startMs = startdate * 1000;
+  const endMs = enddate * 1000;
+  const durationInMs = endMs - startMs;
+  const durationInMinutes = Math.floor(durationInMs / (1000 * 60));
+  const hours = Math.floor(durationInMinutes / 60);
+  const minutes = durationInMinutes % 60;
+  
+  return { hours, minutes };
+}
+
 type Props = {
   weightData?: WeightData[];
   fatRatioData?: BodyFatData[];

@@ -1,5 +1,7 @@
+import { SleepSummary } from '@/classes/LatestData';
 import Patient from '@/classes/Patient';
 import { PATHS } from '@/router';
+import { formatDate } from '@/utils/helpers';
 import { Box, Button, Stack, Typography, styled } from '@mui/material';
 import Link from 'next/link';
 
@@ -37,33 +39,34 @@ const SleepScore = styled(Button)({
 
 type Props = {
   patient: Patient
+  sleepSummary: SleepSummary
 }
 
-const SleepBox = ({ patient }: Props): JSX.Element => {
+const SleepBox = ({ patient, sleepSummary }: Props): JSX.Element => {
   return (
     <SleepInfoBox>
       <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
         <Stack>
           <Typography variant='h5'>Sleep duration</Typography>
-          <Typography variant='h4' fontWeight='bold'>7h</Typography>
+          <Typography variant='h4' fontWeight='bold'>{sleepSummary.duration}</Typography>
         </Stack>
 
         <Stack>
-          <Typography variant='h5'>Quality</Typography>
-          <Typography variant='h4' fontWeight='bold'>val</Typography>
+          <Typography variant='h5'>Efficiency</Typography>
+          <Typography variant='h4' fontWeight='bold'>{sleepSummary.formattedEfficiency}</Typography>
         </Stack>
 
         <Stack>
           <Typography variant='h5'>HR</Typography>
-          <Typography variant='h4' fontWeight='bold'>60</Typography>
+          <Typography variant='h4' fontWeight='bold'>{sleepSummary.hrAverage}</Typography>
         </Stack>
       </Box>
 
       <Link href={PATHS.SLEEP.INDEX.replace(':id', patient.user_id)}>
         <SleepScore>
           <Stack>
-            <Typography fontWeight='bold'>15.4.2023</Typography>
-            <Typography fontWeight='bold' variant='h4'>94</Typography>
+            <Typography fontWeight='bold'>{formatDate(sleepSummary.startdate)}</Typography>
+            <Typography fontWeight='bold' variant='h4'>{sleepSummary.sleepScore}</Typography>
           </Stack>
         </SleepScore>
       </Link>

@@ -15,7 +15,7 @@ const LatestData = ({ latestData, patient }: Props): JSX.Element => {
 
   return (
     <>
-      <SleepBox patient={patient}/>
+      <SleepBox patient={patient} sleepSummary={latestData.latestSleepSummary}/>
       <Box mt={5}>
         <Typography variant='h5' mb={2}>Activity data</Typography>
 
