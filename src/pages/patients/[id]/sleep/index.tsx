@@ -18,7 +18,7 @@ const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} title={'Sleep data'}/>
-      <Box mt={3} sx={{ display: 'flex', flexDirection: 'row' }}>
+      <Box mt={3} sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
         {sleepLogs.map(sleepLog => (
           <SleepLog sleepLog={sleepLog} key={sleepLog.id} patientId={patient.user_id}/>
         ))}

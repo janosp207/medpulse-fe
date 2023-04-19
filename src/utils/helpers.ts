@@ -171,6 +171,7 @@ export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
     xAxisID: 'x-axis-1',
     borderWidth: 1,
     z: 1,
+    pointHitRadius: 30,
   }]
 
   return heartRatesDataset;
@@ -191,17 +192,5 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
     })
   })
 
-  //find duplicates with the same start date and leave only the one with the longest duration
-  const duplicates = [] as any;
-  const unique = [] as any;
-
-  annotations.forEach((annotation: any) => {
-    if (unique.some((item: any) => item.xMin === annotation.xMin)) {
-      duplicates.push(annotation);
-    } else {
-      unique.push(annotation);
-    }
-  })
-
-  return unique;
+  return annotations;
 }
