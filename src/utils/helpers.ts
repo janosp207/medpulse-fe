@@ -4,10 +4,10 @@ import LimitValues from '@/classes/LimitValues';
 import { SleepData, SleepStates } from '@/classes/SleepLog';
 
 const Colors = {
-  [SleepStates.Awake]: 'rgba(255, 0, 0, 0.1)',
-  [SleepStates.LightSleep]: 'rgba(0, 0, 0, 0.1)',
-  [SleepStates.DeepSleep]: 'rgba(0, 0, 255, 0.1)',
-  [SleepStates.REM]: 'rgba(255, 255, 0, 0.1)',
+  [SleepStates.Awake]: 'rgb(255, 128, 0, 0.2)',
+  [SleepStates.LightSleep]: 'rgb(100, 100, 255, 0.2)',
+  [SleepStates.DeepSleep]: 'rgb(30, 30, 255, 0.2)',
+  [SleepStates.REM]: 'rgb(0, 0, 255, 0.2)',
 }
 
 export const formatDate = (date: string | number): string => {
@@ -190,5 +190,18 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
       borderColor: Colors[sleep.state]
     })
   })
-  return annotations;
+
+  //find duplicates with the same start date and leave only the one with the longest duration
+  const duplicates = [] as any;
+  const unique = [] as any;
+
+  annotations.forEach((annotation: any) => {
+    if (unique.some((item: any) => item.xMin === annotation.xMin)) {
+      duplicates.push(annotation);
+    } else {
+      unique.push(annotation);
+    }
+  })
+
+  return unique;
 }
