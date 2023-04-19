@@ -4,10 +4,10 @@ import LimitValues from '@/classes/LimitValues';
 import { SleepData, SleepStates } from '@/classes/SleepLog';
 
 const Colors = {
-  [SleepStates.Awake]: 'rgba(255, 0, 0, 0.3)',
-  [SleepStates.LightSleep]: 'rgba(0, 0, 0, 0.3)',
-  [SleepStates.DeepSleep]: 'rgba(0, 0, 255, 0.3)',
-  [SleepStates.REM]: 'rgba(255, 255, 0, 0.3)',
+  [SleepStates.Awake]: 'rgba(255, 0, 0, 0.1)',
+  [SleepStates.LightSleep]: 'rgba(0, 0, 0, 0.1)',
+  [SleepStates.DeepSleep]: 'rgba(0, 0, 255, 0.1)',
+  [SleepStates.REM]: 'rgba(255, 255, 0, 0.1)',
 }
 
 export const formatDate = (date: string | number): string => {
@@ -165,10 +165,12 @@ export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
   const heartRatesDataset = [{
     label: 'Heart rate',
     data: heartRates,
-    borderColor: '#FF0000',
-    backgroundColor: '#FF0000',
+    borderColor: '#000',
+    backgroundColor: '#000',
     yAxisID: 'y-axis-1',
     xAxisID: 'x-axis-1',
+    borderWidth: 1,
+    z: 1,
   }]
 
   return heartRatesDataset;
@@ -183,8 +185,9 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
       type: 'box',
       xMin: sleep.startdate,
       xMax: sleep.enddate,
+      z: -1,
       backgroundColor: Colors[sleep.state],
-      borderColor: 'rgb(0, 0, 0)',
+      borderColor: Colors[sleep.state]
     })
   })
   return annotations;

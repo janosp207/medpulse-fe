@@ -13,6 +13,13 @@ const SleepLineChart = ({ sleepData }: { sleepData: SleepData[] }): JSX.Element 
   const options: any = {
     responsive: true,
     plugins: {
+      tooltip: {
+        callbacks: {
+          title: function (value: any) {
+            return getTimeFromTimestamp(value[0].raw.x);
+          }
+        }
+      },
       legend: {
         position: 'top' as const,
       },
