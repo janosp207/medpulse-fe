@@ -1,5 +1,6 @@
 import BloodPressureChart from '@/components/Charts/BloodPresusreChart'
 import LimitBox from '@/components/LimitBox'
+import BloodPressureDatagrid from '@/components/Patients/BloodPressure/BloodPressureDatagrid'
 import Header from '@/components/Patients/Header'
 import { useBloodPressureData } from '@/hooks/measurements'
 import { useLimitValues, usePatient } from '@/hooks/patients'
@@ -37,6 +38,7 @@ const BloodPressure = ({ id }: Props): JSX.Element => {
           </Box>
         </Box>
       </Box>
+      <BloodPressureDatagrid bloodPressureData={bloodPressureData} limitValues={limitValues}/>
     </>
   )
 } 

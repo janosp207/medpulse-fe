@@ -60,11 +60,13 @@ export class BloodOxygenData {
 }
 
 export class BloodPressureData {
+  id = 0
   systolic = 0
   diastolic = 0
   createdAt = ''
 
   constructor(data: Partial<BloodPressureData & AdditionalProps>) {
+    this.id = data.id ?? this.id
     this.systolic = data.systolic ?? this.systolic
     this.diastolic = data.diastolic ?? this.diastolic
     this.createdAt = data.created_at ?? this.createdAt
