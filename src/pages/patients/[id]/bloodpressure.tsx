@@ -1,8 +1,9 @@
 import BloodPressureChart from '@/components/Charts/BloodPresusreChart'
+import LimitBox from '@/components/LimitBox'
 import Header from '@/components/Patients/Header'
 import { useBloodPressureData } from '@/hooks/measurements'
 import { useLimitValues, usePatient } from '@/hooks/patients'
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 type Props = {
   id: string
@@ -18,15 +19,24 @@ const BloodPressure = ({ id }: Props): JSX.Element => {
   if (!patient) return (<Typography>Patient not found</Typography>)
   if (!bloodPressureData) return (<Typography>Blood pressure data not found</Typography>)
 
-
+  const { hypotensionLimits, hypertensionLimits } = limitValues || {}
 
   return (
     <>
       <Header patient={patient} title={'Blood pressure data'}/>
-      <BloodPressureChart bloodPressureData={bloodPressureData} 
-        hypotension={limitValues?.hypotensionLimits} 
-        hypertension={limitValues?.hypertensionLimits}
-      />
+      <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+        <BloodPressureChart bloodPressureData={bloodPressureData} 
+          hypotension={hypotensionLimits} 
+          hypertension={hypertensionLimits}
+        />
+        <Box sx={{ mt: 8, ml: 2 }}>
+          <Typography variant={'h5'} fontWeight='bold'>Limits</Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'row', gap: 3, mt: 3 }}>
+            <LimitBox title={'Hypertension'} limit={`${hypertensionLimits?.systolic}/${hypertensionLimits?.diastolic}` } backgroundColor='rgb(255, 30, 30, 0.2)'/>
+            <LimitBox title={'Hypotension'} limit={`${hypotensionLimits?.systolic}/${hypotensionLimits?.diastolic}` } backgroundColor='rgb(30, 30, 255, 0.2)'/>
+          </Box>
+        </Box>
+      </Box>
     </>
   )
 } 

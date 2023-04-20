@@ -14,34 +14,36 @@ const BloodPressureChart = ({ bloodPressureData, hypotension, hypertension }: Pr
     datasets: prepareBloodPressureDatasets(bloodPressureData),
   }
 
-  let annotations = {}
+  const annotations = {
+    hypertension: {},
+    hypotension: {},
+  }
 
-  if(hypotension && hypertension) {
-    annotations = {
-      hypotension: {
-        type: 'box' as const,
-        mode: 'horizontal' as const,
-        scaleID: 'y-axis-1',
-        yMin: hypotension.systolic,
-        yMax: hypotension.diastolic,
-        borderColor: 'rgb(30, 30, 255, 0.2)',
-        backgroundColor: 'rgb(30, 30, 255, 0.2)',
-        borderWidth: 2,
-      },
-      hypertension: {
-        type: 'box' as const,
-        mode: 'horizontal' as const,
-        scaleID: 'y-axis-1',
-        yMin: hypertension.systolic,
-        yMax: hypertension.diastolic,
-        borderColor: 'rgb(255, 128, 0, 0.2)',
-        backgroundColor: 'rgb(255, 128, 0, 0.2)',
-        borderWidth: 2,
-      },
+  if(hypotension) {
+    annotations.hypotension = {
+      type: 'box' as const,
+      mode: 'horizontal' as const,
+      scaleID: 'y-axis-1',
+      yMin: hypotension.systolic,
+      yMax: hypotension.diastolic,
+      borderColor: 'rgb(30, 30, 255, 0.2)',
+      backgroundColor: 'rgb(30, 30, 255, 0.2)',
+      borderWidth: 2,
     }
   }
 
-
+  if(hypertension) {
+    annotations.hypertension = {
+      type: 'box' as const,
+      mode: 'horizontal' as const,
+      scaleID: 'y-axis-1',
+      yMin: hypertension.systolic,
+      yMax: hypertension.diastolic,
+      borderColor: 'rgb(255, 30, 30, 0.2)',
+      backgroundColor: 'rgb(255, 30, 30, 0.2)',
+      borderWidth: 2,
+    }
+  }
 
   const options: any = {
     responsive: true,
