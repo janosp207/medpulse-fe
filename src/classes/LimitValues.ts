@@ -22,4 +22,18 @@ export default class LimitValues {
     this.bloodOxygenMin = data.bloodOxygenMin ?? this.bloodOxygenMin;
     this.sleepDurationMin = data.sleepDurationMin ?? this.sleepDurationMin;
   }
+
+  get hypotensionLimits(): { systolic: number; diastolic: number } {
+    return {
+      systolic: this.systolicMin,
+      diastolic: this.diastolicMin,
+    }
+  }
+
+  get hypertensionLimits(): { systolic: number; diastolic: number } {
+    return {
+      systolic: this.systolicMax,
+      diastolic: this.diastolicMax,
+    }
+  }
 }

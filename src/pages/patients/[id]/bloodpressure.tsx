@@ -1,7 +1,7 @@
 import BloodPressureChart from '@/components/Charts/BloodPresusreChart'
 import Header from '@/components/Patients/Header'
 import { useBloodPressureData } from '@/hooks/measurements'
-import { usePatient } from '@/hooks/patients'
+import { useLimitValues, usePatient } from '@/hooks/patients'
 import { Typography } from '@mui/material'
 
 type Props = {
@@ -11,16 +11,22 @@ type Props = {
 const BloodPressure = ({ id }: Props): JSX.Element => {
   const { patient } = usePatient(id)
   const { bloodPressureData, isLoading } = useBloodPressureData(id)
+  const { limitValues, isLoading: isLimitValuesLoading } = useLimitValues(id)
 
-  if (isLoading) return (<Typography>Loading...</Typography>)
+  if (isLoading || isLimitValuesLoading) return (<Typography>Loading...</Typography>)
 
   if (!patient) return (<Typography>Patient not found</Typography>)
   if (!bloodPressureData) return (<Typography>Blood pressure data not found</Typography>)
 
+
+
   return (
     <>
       <Header patient={patient} title={'Blood pressure data'}/>
-      <BloodPressureChart bloodPressureData={bloodPressureData}/>
+      <BloodPressureChart bloodPressureData={bloodPressureData} 
+        hypotension={limitValues?.hypotensionLimits} 
+        hypertension={limitValues?.hypertensionLimits}
+      />
     </>
   )
 } 
