@@ -3,6 +3,7 @@ const PATHS = {
   PATIENT: {
     SHOW: '/patients/:id',
     WEIGHT: '/patients/:id/weight',
+    BLOOD_PRESSURE: '/patients/:id/bloodpressure',
   },
   SLEEP: {
     INDEX: '/patients/:id/sleep',
@@ -17,6 +18,7 @@ const API_PATHS = {
     LATEST_DATA: '/api/patients/:id/latestdata',
     MEASUREMENTS: '/api/patients/:id/measurements/:type',
     LIMIT_VALUES: '/api/patients/:id/limitvalues',
+    BLOOD_PRESSURE: '/api/patients/:id/bloodpressure',
   },
   SLEEP: {
     INDEX: '/api/patients/:id/sleep', 

@@ -1,9 +1,11 @@
-import { Box, styled, Typography } from '@mui/material'
+import { Box, Button, Typography, styled } from '@mui/material'
+import Link from 'next/link'
 
 type BigInfoBoxProps = {
   title: string
   date: string
   value: string
+  link: string
 }
 
 const StyledBox = styled(Box)({
@@ -14,13 +16,14 @@ const StyledBox = styled(Box)({
   textAlign: 'center',
 })
 
-const StyledLinkBox = styled(Box)({
+const StyledLinkBox = styled(Button)({
   paddingTop: 10,
   paddingBottom: 10,
   marginTop: 10,
   backgroundColor: '#7B949F',
   width: '100%',
   borderRadius: '0 0 20px 20px',
+  color: 'black',
   //lighten up on hover
   '&:hover': {
     backgroundColor: '#7B949F',
@@ -29,15 +32,18 @@ const StyledLinkBox = styled(Box)({
   },
 })
 
-const BigInfoBox = ({ title, date, value }: BigInfoBoxProps): JSX.Element => {
+const BigInfoBox = ({ title, date, value, link }: BigInfoBoxProps): JSX.Element => {
   return (
     <StyledBox>
       <Typography>{title}</Typography>
       <Typography fontWeight='bold'>{date}</Typography>
       <Typography variant='h4' mt={1} mb={1} fontWeight='bold'>{value}</Typography>
-      <StyledLinkBox>
-        <Typography variant='body2' fontWeight='bold'>More info</Typography>
-      </StyledLinkBox>
+
+      <Link href={link}>
+        <StyledLinkBox>
+          <Typography variant='body2' fontWeight='bold'>More info</Typography>
+        </StyledLinkBox>
+      </Link>
     </StyledBox>
   )
 }

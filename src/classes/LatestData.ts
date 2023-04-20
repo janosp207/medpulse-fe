@@ -64,10 +64,10 @@ export class BloodPressureData {
   diastolic = 0
   createdAt = ''
 
-  constructor(data: Partial<BloodPressureData>) {
+  constructor(data: Partial<BloodPressureData & AdditionalProps>) {
     this.systolic = data.systolic ?? this.systolic
     this.diastolic = data.diastolic ?? this.diastolic
-    this.createdAt = data.createdAt ?? this.createdAt
+    this.createdAt = data.created_at ?? this.createdAt
   }
 
   get formattedDate():string {

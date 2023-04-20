@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
+import { BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 import { SleepData, SleepStates } from '@/classes/SleepLog';
 
@@ -204,4 +204,44 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
   })
 
   return annotations;
+}
+
+export const prepareBloodPressureDatasets = (bloodPressureData: BloodPressureData[]): any => {
+  const systolicDataset = [] as any;
+  const diastolicDataset = [] as any;
+
+  bloodPressureData.forEach((bloodPressure: BloodPressureData) => {
+    systolicDataset.push({
+      x: formatDate(bloodPressure.createdAt),
+      y: bloodPressure.systolic,
+    })
+    diastolicDataset.push({
+      x: formatDate(bloodPressure.createdAt),
+      y: bloodPressure.diastolic,
+    })
+  })
+
+  const datasets = [{
+    label: 'Systolic',
+    data: systolicDataset,
+    borderColor: 'red',
+    backgroundColor: 'red',
+    borderWidth: 0,
+    yAxisID: 'y-axis-1',
+    pointStyle: 'triangle',
+    pointRadius: 10,
+    pointHitRadius: 30,
+  }, {
+    label: 'Diastolic',
+    data: diastolicDataset,
+    borderColor: '#000',
+    backgroundColor: 'blue',
+    borderWidth: 0,
+    yAxisID: 'y-axis-1',
+    pointStyle: 'rect',
+    pointRadius: 10,
+    pointHitRadius: 30,
+  }]
+
+  return datasets;
 }
