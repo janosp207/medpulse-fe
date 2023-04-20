@@ -203,6 +203,15 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
     })
   })
 
+  //find sleep periods that overlap, and adjust their xMax to the start of the next sleep period
+  for (let i = 0; i < annotations.length; i++) {
+    if (i < annotations.length - 1) {
+      if (annotations[i].xMax > annotations[i + 1].xMin) {
+        annotations[i].xMax = annotations[i + 1].xMin;
+      }
+    }
+  }
+
   return annotations;
 }
 

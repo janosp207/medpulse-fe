@@ -1,7 +1,7 @@
 import { BloodPressureData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 
-enum BloodPressureClassification {
+export enum BloodPressureClassification {
   High = 'high',
   Low = 'low',
   Normal = 'normal'
@@ -18,14 +18,19 @@ export const prepareBloodPressureDataGrid = (bloodPressureData: BloodPressureDat
     }
   })
 
+  //sort by date
+  rows.sort((a, b) => {
+    return new Date(b.date).getTime() - new Date(a.date).getTime()
+  })
+
   return rows
 }
 
 
 export const classifyBloodPressure = (systolic: number, diastolic: number, limitValues: LimitValues):string => {
-  if (systolic > limitValues.systolicMax || diastolic > limitValues.diastolicMax) {
+  if (systolic >= limitValues.systolicMax || diastolic >=limitValues.diastolicMax) {
     return BloodPressureClassification.High
-  } else if (systolic < limitValues.systolicMin || diastolic < limitValues.diastolicMin) {
+  } else if (systolic <= limitValues.systolicMin || diastolic <= limitValues.diastolicMin) {
     return BloodPressureClassification.Low
   } else {
     return BloodPressureClassification.Normal
