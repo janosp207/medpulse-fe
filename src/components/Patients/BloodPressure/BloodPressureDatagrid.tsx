@@ -1,5 +1,6 @@
 import { BloodPressureData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
+import { formatDate } from '@/utils/helpers';
 import { Box, Typography, } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { classifyBloodPressure, prepareBloodPressureDataGrid } from './helpers';
@@ -20,7 +21,11 @@ const BloodPressureDatagrid = ({ bloodPressureData, limitValues }: Props): JSX.E
         columns={[
           { field: 'systolic', headerName: 'Systolic', width: 130 },
           { field: 'diastolic', headerName: 'Diastolic', width: 130 },
-          { field: 'date', headerName: 'Date', width: 300 },
+          { field: 'date',
+            headerName: 'Date', 
+            width: 300,
+            valueFormatter: ({ value }) => formatDate(value)
+          },
         ]}
         autoHeight
         initialState={{
