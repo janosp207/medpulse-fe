@@ -79,6 +79,10 @@ export class BloodPressureData {
   get formattedBloodPressure():string {
     return `${this.systolic}/${this.diastolic}`
   }
+
+  get pulsePressure():number {
+    return this.systolic - this.diastolic
+  }
 }
 
 export class WeightData {

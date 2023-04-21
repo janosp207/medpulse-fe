@@ -14,6 +14,7 @@ export const prepareBloodPressureDataGrid = (bloodPressureData: BloodPressureDat
       id: data.id,
       systolic: data.systolic,
       diastolic: data.diastolic,
+      pulsePressure: data.pulsePressure,
       date: data.createdAt
     }
   })

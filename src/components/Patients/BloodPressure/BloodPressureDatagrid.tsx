@@ -19,8 +19,9 @@ const BloodPressureDatagrid = ({ bloodPressureData, limitValues }: Props): JSX.E
       <DataGrid
         rows={rows}
         columns={[
-          { field: 'systolic', headerName: 'Systolic', width: 130 },
-          { field: 'diastolic', headerName: 'Diastolic', width: 130 },
+          { field: 'systolic', headerName: 'Systolic', width: 130, valueFormatter: ({ value }) => value + ' mmHg' },
+          { field: 'diastolic', headerName: 'Diastolic', width: 130, valueFormatter: ({ value }) => value + ' mmHg' },
+          { field: 'pulsePressure', headerName: 'Pulse Pressure', width: 130, valueFormatter: ({ value }) => value + ' mmHg' },
           { field: 'date',
             headerName: 'Date', 
             width: 300,
