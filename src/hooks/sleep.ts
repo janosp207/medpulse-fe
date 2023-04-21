@@ -1,3 +1,4 @@
+import { SleepSummary } from '@/classes/LatestData';
 import SleepLog, { SleepData } from '@/classes/SleepLog';
 import { API_PATHS } from '@/router';
 import axios from '@/utils/axios';
@@ -23,6 +24,7 @@ export const useSleepLogs = (patientId: string): useSleepLogsReturnType => {
 
 type useSleepReturnType = {
   sleepData: SleepData[] | undefined
+  sleepSummary: SleepSummary | undefined
   isLoading: boolean
 }
 
@@ -34,7 +36,8 @@ export const useSleep = (patientId: string, sleepId: string): useSleepReturnType
   });
 
   return {
-    sleepData: sleepData ? sleepData.map((sleepData: any) => new SleepData(sleepData)) : undefined,
+    sleepData: sleepData?.sleepStates ? sleepData.sleepStates.map((sleepData: any) => new SleepData(sleepData)) : undefined,
+    sleepSummary: sleepData?.sleepSummary ? new SleepSummary(sleepData.sleepSummary) : undefined,
     isLoading: isLoading,
   }
 }

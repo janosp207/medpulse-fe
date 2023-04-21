@@ -125,6 +125,8 @@ export class SleepSummary {
   totalSleepTime = 0
   sleepEfficiency = 0
   hrAverage = 0
+  hrMin = 0
+  hrMax = 0
 
   constructor(data: Partial<SleepSummary & AdditionalProps>) {
     this.startdate = data.startdate ?? this.startdate;
@@ -133,6 +135,8 @@ export class SleepSummary {
     this.totalSleepTime = data.total_sleep_time ?? this.totalSleepTime;
     this.sleepEfficiency = data.sleep_efficiency ?? this.sleepEfficiency;
     this.hrAverage = data.hr_average ?? this.hrAverage;
+    this.hrMin = data.hr_min ?? this.hrMin;
+    this.hrMax = data.hr_max ?? this.hrMax;
   }
 
   get duration(): string {
@@ -143,6 +147,10 @@ export class SleepSummary {
 
   get formattedEfficiency(): string {
     return `${this.sleepEfficiency*100}%`;
+  }
+
+  get formattedLatency(): string {
+    return `${this.sleepScore} min`;
   }
 }
 
