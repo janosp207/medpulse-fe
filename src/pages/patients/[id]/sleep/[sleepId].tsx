@@ -23,25 +23,25 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
               <Typography mb={2} variant='h5'>Sleep Summary</Typography>
               <Box display='flex' flexDirection='row' gap={3}>
                 <LimitBox
-                  title='Total Sleep Time'
+                  title='Sleep time'
                   limit={sleepSummary.duration}
                 />
                 <LimitBox
-                  title='Sleep Efficiency'
+                  title='Sleep efficiency'
                   limit={sleepSummary.formattedEfficiency}
                 />
                 <LimitBox
-                  title='Avarage Heart Rate'
+                  title='AVG HR'
                   limit={sleepSummary.hrAverage}
                   unit=' BPM'
                 />
                 <LimitBox
-                  title='Heart rate min'
+                  title='MIN HR'
                   limit={sleepSummary.hrMin}
                   unit=' BPM'
                 />
                 <LimitBox
-                  title='Heart rate max'
+                  title='MAX HR'
                   limit={sleepSummary.hrMax}
                   unit=' BPM'
                 />
