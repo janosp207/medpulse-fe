@@ -37,3 +37,19 @@ export const classifyBloodPressure = (systolic: number, diastolic: number, limit
     return BloodPressureClassification.Normal
   }
 }
+
+export const getAvarageBloodPressureValues = (bloodPressureData: BloodPressureData[]): {avarageSystolic: number, avarageDiastolic: number, avaragePulsePressure: number}=> {
+  //return avg systolic, avg diastolic, avg pulse pressure
+  const avarageSystolic = bloodPressureData.reduce((acc, curr) => acc + curr.systolic, 0) / bloodPressureData.length
+  const avarageDiastolic = bloodPressureData.reduce((acc, curr) => acc + curr.diastolic, 0) / bloodPressureData.length
+  const avaragePulsePressure = bloodPressureData.reduce((acc, curr) => acc + curr.pulsePressure, 0) / bloodPressureData.length
+
+  //round to 2 decimals
+  const round = (num: number) => Math.round(num * 100) / 100
+
+  return {
+    avarageSystolic: round(avarageSystolic),
+    avarageDiastolic: round(avarageDiastolic),
+    avaragePulsePressure: round(avaragePulsePressure)
+  }
+}

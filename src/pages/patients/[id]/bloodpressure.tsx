@@ -1,6 +1,7 @@
 import BloodPressureChart from '@/components/Charts/BloodPresusreChart'
 import LimitBox from '@/components/LimitBox'
 import BloodPressureDatagrid from '@/components/Patients/BloodPressure/BloodPressureDatagrid'
+import { getAvarageBloodPressureValues } from '@/components/Patients/BloodPressure/helpers'
 import Header from '@/components/Patients/Header'
 import { useBloodPressureData } from '@/hooks/measurements'
 import { useLimitValues, usePatient } from '@/hooks/patients'
@@ -20,7 +21,9 @@ const BloodPressure = ({ id }: Props): JSX.Element => {
   if (!patient) return (<Typography>Patient not found</Typography>)
   if (!bloodPressureData) return (<Typography>Blood pressure data not found</Typography>)
 
+
   const { hypotensionLimits, hypertensionLimits } = limitValues || {}
+  const { avarageDiastolic, avarageSystolic, avaragePulsePressure } = getAvarageBloodPressureValues(bloodPressureData)
 
   return (
     <>
@@ -37,8 +40,18 @@ const BloodPressure = ({ id }: Props): JSX.Element => {
             <LimitBox title={'Hypotension'} limit={`${hypotensionLimits?.systolic}/${hypotensionLimits?.diastolic}` } backgroundColor='rgb(30, 30, 255, 0.2)'/>
           </Box>
         </Box>
+      </Box>  
+      <Box display='flex' flexDirection='row' gap={3}>
+        <BloodPressureDatagrid bloodPressureData={bloodPressureData} limitValues={limitValues}/>
+        <Box>
+          <Typography variant={'h5'} fontWeight='bold'> Avarage values </Typography>
+          <Box display='flex' flexDirection='row' gap={3} mt={3}>
+            <LimitBox title={'Systolic'} limit={`${avarageSystolic}`} backgroundColor='rgb(255, 30, 30, 0.2)'/>
+            <LimitBox title={'Diastolic'} limit={`${avarageDiastolic}`} backgroundColor='rgb(255, 30, 30, 0.2)'/>
+            <LimitBox title={'Pulse pressure'} limit={`${avaragePulsePressure}`} backgroundColor='rgb(255, 30, 30, 0.2)'/>
+          </Box>
+        </Box>
       </Box>
-      <BloodPressureDatagrid bloodPressureData={bloodPressureData} limitValues={limitValues}/>
     </>
   )
 } 
