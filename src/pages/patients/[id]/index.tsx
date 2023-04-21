@@ -1,11 +1,12 @@
 import Header from '@/components/Patients/Header'
 import PatientInfo from '@/components/Patients/PatientInfo'
-import { useLatestData, usePatient } from '@/hooks/patients'
+import { useLatestData, usePatient, useWarnings } from '@/hooks/patients'
 import { Typography } from '@mui/material'
 
 const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
   const { patient } = usePatient(id)
   const { latestData } = useLatestData(id)
+  const { warnings } = useWarnings(id)
 
   if (!latestData || !patient) return <Typography>Loading...</Typography>
 

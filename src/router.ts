@@ -19,6 +19,7 @@ const API_PATHS = {
     MEASUREMENTS: '/api/patients/:id/measurements/:type',
     LIMIT_VALUES: '/api/patients/:id/limitvalues',
     BLOOD_PRESSURE: '/api/patients/:id/bloodpressure',
+    WARNINGS: '/api/patients/:id/warnings',
   },
   SLEEP: {
     INDEX: '/api/patients/:id/sleep', 

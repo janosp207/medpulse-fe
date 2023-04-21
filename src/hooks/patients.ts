@@ -85,3 +85,22 @@ export const useLimitValues = (id: string): useLimitValuesReturnType => {
     isLoading,
   }
 }
+
+type useWarningsReturnType = {
+  warnings: any
+  isLoading: boolean
+}
+
+export const useWarnings = (id: string): useWarningsReturnType => {
+  const { data: warnings, isLoading } = useSWR(API_PATHS.PATIENTS.WARNINGS.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+
+  return {
+    warnings,
+    isLoading,
+  }
+}

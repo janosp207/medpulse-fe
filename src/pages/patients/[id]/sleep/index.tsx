@@ -9,6 +9,7 @@ const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   const { patient, isLoading: isPatientLoading } = usePatient(id)
   const { sleepLogs, isLoading: isSleepLoading } = useSleepLogs(id)
 
+
   if (isPatientLoading || isSleepLoading) return <Typography>Loading...</Typography>
 
   if (!patient) return <Typography>Could not find patient</Typography>
