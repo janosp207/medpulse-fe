@@ -6,7 +6,6 @@ export default class LimitValues {
   diastolicMax = 0;
   systolicMin = 0;
   diastolicMin = 0;
-  bloodOxygenMax = 0;
   bloodOxygenMin = 0;
   sleepDurationMin = 0;
 
@@ -18,7 +17,6 @@ export default class LimitValues {
     this.diastolicMax = data.diastolicMax ?? this.diastolicMax;
     this.systolicMin = data.systolicMin ?? this.systolicMin;
     this.diastolicMin = data.diastolicMin ?? this.diastolicMin;
-    this.bloodOxygenMax = data.bloodOxygenMax ?? this.bloodOxygenMax;
     this.bloodOxygenMin = data.bloodOxygenMin ?? this.bloodOxygenMin;
     this.sleepDurationMin = data.sleepDurationMin ?? this.sleepDurationMin;
   }

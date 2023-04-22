@@ -185,16 +185,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
                 inputRef={diastolicMinRef}
               />
             </Box>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Blood oxygen max"
-              defaultValue={limitValues.bloodOxygenMax}
-              name="bloodOxygenMax"
-              fullWidth
-              variant="outlined"
-              inputRef={bloodOxygenMaxRef}
-            />
+            <Typography>Hypoxemia</Typography>
             <TextField
               autoFocus
               margin="dense"
