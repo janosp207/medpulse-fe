@@ -1,5 +1,5 @@
 import Warning from '@/classes/Warning'
-import { Stack } from '@mui/material'
+import { Box } from '@mui/material'
 import WarningBox from './InfoBoxes/WarningBox'
 
 type Props = {
@@ -10,11 +10,11 @@ const Warnings = ({ warnings }: Props): JSX.Element => {
   if (!warnings) return <></>
 
   return (
-    <Stack pl={3} pt={3}> 
+    <Box display='flex' flexDirection='row' gap={3} pl={3} pt={3}> 
       {warnings.map(warning => (
         <WarningBox key={warning.type} warning={warning}/>
       ))}
-    </Stack>
+    </Box>
   )
 }
 
