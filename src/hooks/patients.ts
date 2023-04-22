@@ -4,7 +4,7 @@ import Patient from '@/classes/Patient'
 import { API_PATHS } from '@/router'
 import axios from '@/utils/axios'
 import useSWR from 'swr'
-
+import Warning from '@/classes/Warning'
 type usePatientsReturnType = {
   patients: Patient[] | undefined
   isLoading: boolean
@@ -87,7 +87,7 @@ export const useLimitValues = (id: string): useLimitValuesReturnType => {
 }
 
 type useWarningsReturnType = {
-  warnings: any
+  warnings: Warning[] | undefined
   isLoading: boolean
 }
 
@@ -100,7 +100,7 @@ export const useWarnings = (id: string): useWarningsReturnType => {
 
 
   return {
-    warnings,
+    warnings : warnings ? warnings.map((warning: any) => new Warning(warning)) : undefined,
     isLoading,
   }
 }

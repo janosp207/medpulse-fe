@@ -1,5 +1,6 @@
 import Header from '@/components/Patients/Header'
 import PatientInfo from '@/components/Patients/PatientInfo'
+import Warnings from '@/components/Patients/Warnings'
 import { useLatestData, usePatient, useWarnings } from '@/hooks/patients'
 import { Typography } from '@mui/material'
 
@@ -13,6 +14,7 @@ const PatientsProfile = ({ id } : {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} title={'Latest data dashboard'} />
+      <Warnings warnings={warnings} />
       <PatientInfo patient={patient} latestData={latestData} />
     </>
   )
