@@ -1,4 +1,4 @@
-import { BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
+import { BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import { API_PATHS } from '@/router';
 import axios from '@/utils/axios';
 import useSWR from 'swr';
@@ -55,6 +55,25 @@ export const useBloodPressureData = (id: string): useBloodPressureReturnType => 
 
   return {
     bloodPressureData: bloodPressure ? bloodPressure.map((bloodPressure: any) => new BloodPressureData(bloodPressure)) : undefined,
+    isLoading: isLoading,
+  }
+}
+
+type useBloodOxygenReturnType = {
+  bloodOxygenData: BloodOxygenData[] | undefined
+  isLoading: boolean
+}
+
+export const useBloodOxygenData = (id: string): useBloodOxygenReturnType => {
+  const { data: bloodOxygen, isLoading } = useSWR(API_PATHS.PATIENTS.BLOOD_OXYGEN.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  }
+  );
+
+  return {
+    bloodOxygenData: bloodOxygen ? bloodOxygen.map((bloodOxygen: any) => new BloodOxygenData(bloodOxygen)) : undefined,
     isLoading: isLoading,
   }
 }

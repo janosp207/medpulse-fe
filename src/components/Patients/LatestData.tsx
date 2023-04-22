@@ -41,7 +41,7 @@ const LatestData = ({ latestData, patient }: Props): JSX.Element => {
             <BigInfoBox title='Blood pressure' date={latestBloodPressure.formattedDate} value={latestBloodPressure.formattedBloodPressure} link={PATHS.PATIENT.BLOOD_PRESSURE.replace(':id', patient.user_id)}/>
           </Grid>
           <Grid item xs={12} md={3}>
-            <BigInfoBox title='Blood oxygen' date={latestBloodOxygen.formattedDate} value={latestBloodOxygen.formattedBloodOxygen} link={''}/>
+            <BigInfoBox title='Blood oxygen' date={latestBloodOxygen.formattedDate} value={latestBloodOxygen.formattedBloodOxygen} link={PATHS.PATIENT.BLOOD_OXYGEN.replace(':id', patient.user_id)}/>
           </Grid>
         </Grid>
       </Box>

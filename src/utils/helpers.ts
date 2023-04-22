@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
+import { BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 import { SleepData, SleepStates } from '@/classes/SleepLog';
 
@@ -252,5 +252,34 @@ export const prepareBloodPressureDatasets = (bloodPressureData: BloodPressureDat
     pointHitRadius: 30,
   }]
 
+  return datasets;
+}
+
+export const prepareBloodOxygenDatasets = (bloodOxygenData: BloodOxygenData[], limitValue: number): any => {
+  const bloodOxygenDataset = [] as any;
+  
+  bloodOxygenData.forEach((bloodOxygen: BloodOxygenData) => {
+    bloodOxygenDataset.push({
+      x: formatDate(bloodOxygen.createdAt),
+      y: bloodOxygen.bloodOxygen*100,
+    })
+  })
+
+  const datasets = [{
+    label: 'Blood oxygen',
+    data: bloodOxygenDataset,
+    borderColor: 'red',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+    pointBackgroundColor: bloodOxygenData.map((bloodOxygen: BloodOxygenData) => {
+      if (bloodOxygen.bloodOxygen * 100 <= limitValue) {
+        return '#FFD700';
+      }
+      return 'red';
+    }),
+  }]
+
+  console.log(datasets);
   return datasets;
 }

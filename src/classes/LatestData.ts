@@ -45,9 +45,9 @@ export class ActivityData {
 export class BloodOxygenData {
   bloodOxygen = 0
   createdAt = ''
-  constructor(data: Partial<BloodOxygenData>) {
-    this.bloodOxygen = data.bloodOxygen ?? this.bloodOxygen
-    this.createdAt = data.createdAt ?? this.createdAt
+  constructor(data: Partial<BloodOxygenData & AdditionalProps>) {
+    this.bloodOxygen = data.blood_oxygen ?? this.bloodOxygen
+    this.createdAt = data.created_at ?? this.createdAt
   }
 
   get formattedDate():string {
@@ -55,7 +55,7 @@ export class BloodOxygenData {
   }
 
   get formattedBloodOxygen():string {
-    return `${this.bloodOxygen * 100}%`
+    return `${this.bloodOxygen * 100} %`
   }
 }
 
