@@ -46,7 +46,7 @@ export class BloodOxygenData {
   bloodOxygen = 0
   createdAt = ''
   constructor(data: Partial<BloodOxygenData & AdditionalProps>) {
-    this.bloodOxygen = data.blood_oxygen ?? this.bloodOxygen
+    this.bloodOxygen = data.bloodOxygen ?? this.bloodOxygen
     this.createdAt = data.created_at ?? this.createdAt
   }
 

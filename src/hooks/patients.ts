@@ -1,10 +1,10 @@
 import LatestData from '@/classes/LatestData'
 import LimitValues from '@/classes/LimitValues'
 import Patient from '@/classes/Patient'
+import Warning from '@/classes/Warning'
 import { API_PATHS } from '@/router'
 import axios from '@/utils/axios'
 import useSWR from 'swr'
-import Warning from '@/classes/Warning'
 type usePatientsReturnType = {
   patients: Patient[] | undefined
   isLoading: boolean
@@ -52,6 +52,7 @@ export const useLatestData = (id: string): useLatestDataReturnType => {
 
     return data.body;
   });
+
 
   return {
     latestData: latestData ? new LatestData(latestData) : undefined,
