@@ -13,7 +13,7 @@ const StyledBox = styled(Box)({
 
 type SmallInfoBoxProps = {
   title: string
-  date: string
+  date?: string
   value: string
 }
 

@@ -1,9 +1,11 @@
 import BloodOxygenChart from '@/components/Charts/BloodOxygenChart'
+import LimitBox from '@/components/LimitBox'
 import BloodOxygenDatagrid from '@/components/Patients/BloodOxygen/BloodOxygenDatagrid'
+import { getBloodOxygenColor, getMonthAvarage } from '@/components/Patients/BloodOxygen/helpers'
 import Header from '@/components/Patients/Header'
 import { useBloodOxygenData } from '@/hooks/measurements'
 import { useLimitValues, usePatient } from '@/hooks/patients'
-import { Typography } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 
 const BloodOxygen = ({ id }: {id: string}): JSX.Element => {
   const { bloodOxygenData, isLoading } = useBloodOxygenData(id)
@@ -20,7 +22,13 @@ const BloodOxygen = ({ id }: {id: string}): JSX.Element => {
       <Header patient={patient} title={'Blood oxygen data'}/>
       { bloodOxygenData?.length ? 
         <>
-          <BloodOxygenChart bloodOxygenData={bloodOxygenData} threshold={limitValues?.bloodOxygenMin}/>
+          <Box display='flex' flexDirection='row'>
+            <BloodOxygenChart bloodOxygenData={bloodOxygenData} threshold={limitValues?.bloodOxygenMin}/>
+            <Box mt={5} ml={3}>
+              <Typography variant='h5' fontWeight='bold' mb={3}>Avarage value for past 30 days</Typography>
+              <LimitBox title='Blood oxygen' limit={`${getMonthAvarage(bloodOxygenData)} %`} backgroundColor={limitValues?.bloodOxygenMin ? getBloodOxygenColor(getMonthAvarage(bloodOxygenData), limitValues?.bloodOxygenMin) : ''}/>
+            </Box>
+          </Box>
           <BloodOxygenDatagrid bloodOxygenData={bloodOxygenData} limitValues={limitValues}/>
         </>
         :
