@@ -1,4 +1,5 @@
 import BloodOxygenChart from '@/components/Charts/BloodOxygenChart'
+import BloodOxygenDatagrid from '@/components/Patients/BloodOxygen/BloodOxygenDatagrid'
 import Header from '@/components/Patients/Header'
 import { useBloodOxygenData } from '@/hooks/measurements'
 import { useLimitValues, usePatient } from '@/hooks/patients'
@@ -11,13 +12,18 @@ const BloodOxygen = ({ id }: {id: string}): JSX.Element => {
 
   if(isLoading || isPatientLoading) return (<Typography>Loading...</Typography>)
   if(!patient) return (<Typography>Patient not found</Typography>)
+  if(!bloodOxygenData) return (<Typography>No data available</Typography>)
   
 
   return (
     <>
       <Header patient={patient} title={'Blood oxygen data'}/>
       { bloodOxygenData?.length ? 
-        <BloodOxygenChart bloodOxygenData={bloodOxygenData} threshold={limitValues?.bloodOxygenMin}/> :
+        <>
+          <BloodOxygenChart bloodOxygenData={bloodOxygenData} threshold={limitValues?.bloodOxygenMin}/>
+          <BloodOxygenDatagrid bloodOxygenData={bloodOxygenData} limitValues={limitValues}/>
+        </>
+        :
         <Typography>No data available</Typography>
       }
     </>

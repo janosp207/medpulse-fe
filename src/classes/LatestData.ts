@@ -43,9 +43,11 @@ export class ActivityData {
 }
 
 export class BloodOxygenData {
+  id=0
   bloodOxygen = 0
   createdAt = ''
   constructor(data: Partial<BloodOxygenData & AdditionalProps>) {
+    this.id = data.id ?? this.id
     this.bloodOxygen = data.bloodOxygen ?? this.bloodOxygen
     this.createdAt = data.createdAt ?? this.createdAt
   }

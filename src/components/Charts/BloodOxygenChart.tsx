@@ -48,7 +48,7 @@ const BloodOxygenChart = ({ bloodOxygenData, threshold = 0 }: Props): JSX.Elemen
   };
 
   return (
-    <Box width={'50%'}>
+    <Box width={'60%'}>
       <Line
         data={chartData}
         options={options}
