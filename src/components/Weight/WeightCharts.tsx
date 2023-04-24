@@ -24,7 +24,8 @@ const WeightCharts = ({ datasets, limitValues }: Props): JSX.Element => {
         {
           limitValues &&
           <Box sx={{ display: 'flex', flexDirection: 'row', gap: 5 }}>
-            <LimitBox title='Weight' limit={limitValues.weight} unit='kg'/>
+            <LimitBox title='Weight min' limit={limitValues.weightMin} unit='kg'/>
+            <LimitBox title='Weight max' limit={limitValues.weight} unit='kg'/>
             <LimitBox title='Body fat' limit={limitValues.fatRatio} unit='%'/>
             <LimitBox title='BMI' limit={limitValues.bmi}/>
           </Box>

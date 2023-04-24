@@ -24,9 +24,15 @@ const BloodOxygen = ({ id }: {id: string}): JSX.Element => {
         <>
           <Box display='flex' flexDirection='row'>
             <BloodOxygenChart bloodOxygenData={bloodOxygenData} threshold={limitValues?.bloodOxygenMin}/>
-            <Box mt={5} ml={3}>
-              <Typography variant='h5' fontWeight='bold' mb={3}>Avarage value for past 30 days</Typography>
-              <LimitBox title='Blood oxygen' limit={`${getMonthAvarage(bloodOxygenData)} %`} backgroundColor={limitValues?.bloodOxygenMin ? getBloodOxygenColor(getMonthAvarage(bloodOxygenData), limitValues?.bloodOxygenMin) : ''}/>
+            <Box>
+              <Box mt={5} ml={3}>
+                <Typography variant='h5' fontWeight='bold' mb={3}>Limit values</Typography>
+                <LimitBox title='Blood oxygen min' limit={`${limitValues?.bloodOxygenMin} %`} backgroundColor={limitValues?.bloodOxygenMin ? getBloodOxygenColor(getMonthAvarage(bloodOxygenData), limitValues?.bloodOxygenMin) : ''}/>
+              </Box>
+              <Box mt={5} ml={3}>
+                <Typography variant='h5' fontWeight='bold' mb={3}>Avarage value for past 30 days</Typography>
+                <LimitBox title='Blood oxygen' limit={`${getMonthAvarage(bloodOxygenData)} %`} backgroundColor={limitValues?.bloodOxygenMin ? getBloodOxygenColor(getMonthAvarage(bloodOxygenData), limitValues?.bloodOxygenMin) : ''}/>
+              </Box>
             </Box>
           </Box>
           <BloodOxygenDatagrid bloodOxygenData={bloodOxygenData} limitValues={limitValues}/>
