@@ -14,7 +14,7 @@ export default class Warning {
   }
   
   get title(): string {
-    return this.isTrendWarning ? `${this.type} - ${this.isWithinLimits ? 'within limits' : 'above limits'}` : this.type;
+    return this.isTrendWarning ? `${this.type} - ${this.isWithinLimits ? 'within limits' : 'out of limits'}` : this.type;
   }
 
   get warningCountText(): string {
@@ -37,25 +37,25 @@ export default class Warning {
     }
 
     //stable
-    if (this.slope > -0.1 && this.slope < 0.1) {
+    if (this.slope > -0.07 && this.slope < 0.07) {
       return 'stable';
     }
 
     //rising
-    if (this.slope > 0.1 && this.slope < 0.3) {
+    if (this.slope > 0.07 && this.slope < 0.17) {
       return 'rising';
     }
 
-    if (this.slope > 0.3) {
+    if (this.slope > 0.17) {
       return 'rapidly rising';
     }
 
     //falling
-    if (this.slope < -0.1 && this.slope > -0.3) {
+    if (this.slope < -0.07 && this.slope > -0.17) {
       return 'falling';
     }
 
-    if (this.slope < -0.3) {
+    if (this.slope < -0.17) {
       return 'rapidly falling';
     }
 
