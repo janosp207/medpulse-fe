@@ -4,6 +4,7 @@ export default class Warning {
   isWithinLimits = false;
   slope = 0;
   isTrendWarning = true;
+  text = '';
 
   constructor(data: Partial<Warning>) {
     this.type = data.type ?? this.type;
@@ -11,6 +12,7 @@ export default class Warning {
     this.isWithinLimits = data.isWithinLimits ?? this.isWithinLimits;
     this.slope = data.slope ?? this.slope;
     this.isTrendWarning = data.isTrendWarning ?? this.isTrendWarning;
+    this.text = data.text ?? this.text;
   }
   
   get title(): string {
@@ -32,6 +34,9 @@ export default class Warning {
   }
 
   get warningTrendText(): string {
+    if (this.text) {
+      return this.text
+    }
     if(!this.isTrendWarning) {
       return 'occured ' + this.value + ' times';
     }
