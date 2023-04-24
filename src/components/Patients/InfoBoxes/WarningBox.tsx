@@ -75,7 +75,7 @@ const WarningBox = ({ warning }: Props): JSX.Element => {
         {isTrendWarning ? WarningIcons[warningTrendText] : WarningCountIcons[warningCountIcon]}
       </Box>
       <Stack>
-        <Typography fontWeight='bold'>{title}</Typography>
+        <Typography fontWeight='bold' textTransform={'capitalize'}>{title}</Typography>
         <Typography>{warningTrendText}</Typography>
       </Stack>
     </StyledBox>
