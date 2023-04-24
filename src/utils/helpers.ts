@@ -67,6 +67,7 @@ export const prepareWeightDatasets = ({ weightData, fatRatioData, heightData, li
   }
 
   const maxWeight = limitValues?.weight || 0;
+  const minWeight = limitValues?.weightMin || 0;
   const maxBodyFat = limitValues?.fatRatio || 0;
   const maxBMI = limitValues?.bmi || 0;
 
@@ -85,11 +86,17 @@ export const prepareWeightDatasets = ({ weightData, fatRatioData, heightData, li
         if (weight.value > maxWeight && maxWeight !== 0) {
           return '#FFD700';
         }
+        if (weight.value < minWeight && minWeight !== 0) {
+          return '#FFD700';
+        }
         return '#FF0000';
       }),
       //change point size
       pointRadius: weightData.map((weight: WeightData) => {
         if (weight.value > maxWeight && maxWeight !== 0) {
+          return 6;
+        }
+        if (weight.value < minWeight && minWeight !== 0) {
           return 6;
         }
         return 3;

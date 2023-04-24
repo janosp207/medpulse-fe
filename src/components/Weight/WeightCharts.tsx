@@ -13,9 +13,9 @@ const WeightCharts = ({ datasets, limitValues }: Props): JSX.Element => {
   return(
     <Box sx={{ display: 'flex', flexDirection: 'row',  gap: 5 }}>
       <Box width={'50%'}>
-        <FilledLineChart datasets={datasets.weightDataset} title={'Patient weight data'} threshold={showLimitValues ? limitValues.weight : 0}/>
-        <FilledLineChart datasets={datasets.fatRatioDataset} title={'Patient fat ratio data'} threshold={showLimitValues ? limitValues.fatRatio : 0}/>
-        <FilledLineChart datasets={datasets.bmiDataset} title={'Patient bmi data'} threshold={showLimitValues ? limitValues.bmi : 0}/>
+        <FilledLineChart datasets={datasets.weightDataset} title={'Patient weight data'} thresholdMax={showLimitValues ? limitValues.weight : 0} thresholdMin={showLimitValues ? limitValues.weightMin : 0}/>
+        <FilledLineChart datasets={datasets.fatRatioDataset} title={'Patient fat ratio data'} thresholdMax={showLimitValues ? limitValues.fatRatio : 0}/>
+        <FilledLineChart datasets={datasets.bmiDataset} title={'Patient bmi data'} thresholdMax={showLimitValues ? limitValues.bmi : 0}/>
       </Box>
       <Box mt={5}>
         <Typography variant='h5' mb={3}>
