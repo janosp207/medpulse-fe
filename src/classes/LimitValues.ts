@@ -1,5 +1,6 @@
 export default class LimitValues {
   weight = 0;
+  weightMin = 0;
   fatRatio = 0;
   bmi = 0;
   systolicMax = 0;
@@ -11,6 +12,7 @@ export default class LimitValues {
 
   constructor(data: Partial<LimitValues>) {
     this.weight = data.weight ?? this.weight;
+    this.weightMin = data.weightMin ?? this.weightMin;
     this.fatRatio = data.fatRatio ?? this.fatRatio;
     this.bmi = data.bmi ?? this.bmi;
     this.systolicMax = data.systolicMax ?? this.systolicMax;

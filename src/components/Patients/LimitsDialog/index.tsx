@@ -21,6 +21,7 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
   const { limitValues, store, isLoading } = useLimitValues(patient.user_id);
 
   const weightRef = useRef<HTMLInputElement>(null);
+  const weightMinRef = useRef<HTMLInputElement>(null);
   const fatRatioRef = useRef<HTMLInputElement>(null);
   const bmiRef = useRef<HTMLInputElement>(null);
   const systolicMaxRef = useRef<HTMLInputElement>(null);
@@ -43,6 +44,10 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
     {
       name: 'weight',
       ref: weightRef
+    },
+    {
+      name: 'weightMin',
+      ref: weightMinRef
     },
     {
       name: 'fatRatio',
@@ -112,6 +117,16 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               fullWidth
               variant="outlined"
               inputRef={weightRef}
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              label="Weight min"
+              defaultValue={limitValues.weightMin}
+              name="weightMin"
+              fullWidth
+              variant="outlined"
+              inputRef={weightMinRef}
             />
             <TextField
               autoFocus
