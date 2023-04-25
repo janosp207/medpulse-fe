@@ -1,3 +1,4 @@
+import SleepDurationChart from '@/components/Charts/SleepDurationChart'
 import Header from '@/components/Patients/Header'
 import SleepLog from '@/components/Sleep/SleepLog'
 import { usePatient } from '@/hooks/patients'
@@ -19,10 +20,16 @@ const PatientWeight = ({ id }: {id: string}): JSX.Element => {
   return (
     <>
       <Header patient={patient} title={'Sleep data'}/>
-      <Box mt={3} sx={{ display: 'flex', flexDirection: 'row', gap: 2 }}>
-        {sleepLogs.map(sleepLog => (
-          <SleepLog sleepLog={sleepLog} key={sleepLog.id} patientId={patient.user_id}/>
-        ))}
+      <Box display={'flex'} flexDirection={'row'}>
+        <Box mt={3} sx={{ display: 'flex', flexDirection: 'row', gap: 2, width: '50%' }}>
+          {sleepLogs.map(sleepLog => (
+            <SleepLog sleepLog={sleepLog} key={sleepLog.id} patientId={patient.user_id}/>
+          ))}
+        </Box>
+        <Box mt={3} width={'50%'}>
+          <Typography variant='h5' mb={3}>Sleep duration overview</Typography>
+          <SleepDurationChart sleepLogs={sleepLogs}/>
+        </Box>
       </Box>
     </>
   )

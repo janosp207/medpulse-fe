@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
-import { SleepData, SleepStates } from '@/classes/SleepLog';
+import SleepLog, { SleepData, SleepStates } from '@/classes/SleepLog';
 
 const Colors = {
   [SleepStates.Awake]: 'rgb(255, 128, 0, 0.2)',
@@ -49,6 +49,14 @@ export const getDurationFromTimestamps = (startdate: number, enddate: number): {
   const hours = Math.floor(durationInMinutes / 60);
   const minutes = durationInMinutes % 60;
   
+  return { hours, minutes };
+}
+
+export const turnDurationToHoursAndMinutes = (duration: number): {hours: number, minutes: number} => {
+  const durationInMinutes = Math.floor(duration / 60);
+  const hours = Math.floor(durationInMinutes / 60);
+  const minutes = durationInMinutes % 60;
+
   return { hours, minutes };
 }
 
@@ -288,5 +296,28 @@ export const prepareBloodOxygenDatasets = (bloodOxygenData: BloodOxygenData[], l
   }]
 
   console.log(datasets);
+  return datasets;
+}
+
+export const prepareSleepDurationChart = (sleepLogs: SleepLog[]): any => {
+  const sleepDurationDataset = [] as any;
+
+  sleepLogs.forEach((sleep: SleepLog) => {
+    sleepDurationDataset.push({
+      x: formatDate(sleep.startdate),
+      y: sleep.rawDuration,
+    })
+  })
+
+  const datasets = [{
+    label: 'Sleep duration',
+    data: sleepDurationDataset,
+    borderColor: 'red',
+    backgroundColor: 'red',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  }]
+
   return datasets;
 }

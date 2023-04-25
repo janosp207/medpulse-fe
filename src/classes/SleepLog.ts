@@ -50,6 +50,10 @@ export default class SleepLog {
     this.enddate = data.enddate ?? this.enddate;
   }
 
+  get rawDuration(): number {
+    return this.enddate - this.startdate
+  }
+
   get duration(): { hours: number, minutes: number} {
     return getDurationFromTimestamps(this.startdate, this.enddate)
   }
