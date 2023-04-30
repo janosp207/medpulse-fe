@@ -1,3 +1,18 @@
+type AdditionalProps = {
+  [key: string]: any
+}
+
+export class WellnessRating {
+  rating = 0
+  overallRating = 0
+  createdAt = ''
+
+  constructor(data: Partial<WellnessRating & AdditionalProps>) {
+    this.rating = data.rating ?? this.rating
+    this.overallRating = data.overall_rating ?? this.overallRating
+    this.createdAt = data.created_at ?? this.createdAt
+  }
+}
 export default class Patient {
   user_id = '';
   name = '';

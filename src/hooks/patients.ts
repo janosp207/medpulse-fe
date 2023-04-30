@@ -1,6 +1,6 @@
 import LatestData, { ActivityData } from '@/classes/LatestData'
 import LimitValues from '@/classes/LimitValues'
-import Patient from '@/classes/Patient'
+import Patient, { WellnessRating } from '@/classes/Patient'
 import Warning from '@/classes/Warning'
 import { API_PATHS } from '@/router'
 import axios from '@/utils/axios'
@@ -120,6 +120,24 @@ export const useActivity = (id: string): useActivityReturnType => {
 
   return {
     activity: activity ? activity.map((activityData: any) => new ActivityData(activityData)) : undefined,
+    isLoading,
+  }
+}
+
+type useWellnessRatingsReturnType = {
+  wellnessRatings: WellnessRating[] | undefined
+  isLoading: boolean
+}
+
+export const useWellnessRatings = (id: string): useWellnessRatingsReturnType => {
+  const { data: wellnessRatings, isLoading } = useSWR(API_PATHS.PATIENTS.WELLNESS.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+  return {
+    wellnessRatings: wellnessRatings ? wellnessRatings.map((wellnessRating: any) => new WellnessRating(wellnessRating)) : undefined,
     isLoading,
   }
 }

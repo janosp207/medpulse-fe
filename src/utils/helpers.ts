@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { ActivityData, BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
+import { WellnessRating } from '@/classes/Patient';
 import SleepLog, { SleepData, SleepStates } from '@/classes/SleepLog';
 
 const Colors = {
@@ -403,5 +404,42 @@ export const prepareActivityDatasets = (activities: ActivityData[]): any => {
     pointRadius: 5,
     pointHitRadius: 30,
   }]
+  return datasets;
+}
+
+export const prepareWellnessDatasets = (wellness: WellnessRating[]): any => {
+  const ratingsDataset = [] as any;
+  const overallDataset = [] as any;
+
+  wellness.forEach((wellnessData: WellnessRating) => {
+    ratingsDataset.push({
+      x: formatDate(wellnessData.createdAt),
+      y: wellnessData.rating,
+    })
+    overallDataset.push({
+      x: formatDate(wellnessData.createdAt),
+      y: wellnessData.overallRating,
+    })
+  })
+
+  const datasets = [{
+    label: 'Breathing and fatigue rating',
+    data: ratingsDataset,
+    borderColor: 'red',
+    backgroundColor: 'red',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  },
+  {
+    label: 'Overall condition rating',
+    data: overallDataset,
+    borderColor: 'blue',
+    backgroundColor: 'blue',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  }]
+  
   return datasets;
 }
