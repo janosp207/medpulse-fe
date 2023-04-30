@@ -322,12 +322,31 @@ export const prepareSleepDurationChart = (sleepLogs: SleepLog[]): any => {
     })
   })
 
+  //prepare sleep apneas dataset
+  const sleepApneasDataset = [] as any;
+
+  sleepLogs.forEach((sleep: SleepLog) => {
+    sleepApneasDataset.push({
+      x: formatDate(sleep.startdate),
+      y: sleep.sleepSummary ? sleep.sleepSummary.ahi : 0,
+    })
+  })
+
   const datasets = [{
     label: 'Sleep duration',
     data: sleepDurationDataset,
     borderColor: 'red',
     backgroundColor: 'red',
     yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  },
+  {
+    label: 'Sleep apneas',
+    data: sleepApneasDataset,
+    borderColor: 'blue',
+    backgroundColor: 'blue',
+    yAxisID: 'y-axis-2',
     pointRadius: 5,
     pointHitRadius: 30,
   }]

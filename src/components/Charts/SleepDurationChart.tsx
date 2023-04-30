@@ -19,8 +19,13 @@ const SleepDurationChart = ({ sleepLogs }: Props): JSX.Element => {
             return value[0].raw.x
           },
           label: function (context: any) {
-            const { hours, minutes } = turnDurationToHoursAndMinutes(context.raw.y)
-            return `${hours} h ${minutes} min`
+            if (context.dataset.label === 'Sleep duration') {
+              const { hours, minutes } = turnDurationToHoursAndMinutes(context.raw.y)
+              return `${hours} h ${minutes} min`
+            } else {
+              return `${context.raw.y} sleep apneas per hour`
+            }
+
           }
         }
       },
@@ -43,6 +48,11 @@ const SleepDurationChart = ({ sleepLogs }: Props): JSX.Element => {
             return `${hours} h ${minutes} min`
           }
         }
+      },
+      'y-axis-2': {
+        type: 'linear' as const,
+        display: true,
+        position: 'right' as const,
       },
     },
   }
