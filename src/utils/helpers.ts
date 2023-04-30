@@ -7,7 +7,7 @@ const Colors = {
   [SleepStates.Awake]: 'rgb(255, 128, 0, 0.2)',
   [SleepStates.LightSleep]: 'rgb(100, 100, 255, 0.2)',
   [SleepStates.DeepSleep]: 'rgb(30, 30, 255, 0.2)',
-  [SleepStates.REM]: 'rgb(0, 0, 255, 0.2)',
+  [SleepStates.REM]: 'rgb(0, 0, 255, 0.3)',
 }
 
 export const formatDate = (date: string | number): string => {
@@ -226,6 +226,18 @@ export const prepareAnnotations = (sleepData: SleepData[]): any => {
       }
     }
   }
+
+  //find sleep periods that end after eachother but have the same sleep state, and merge them
+  for (let i = 0; i < annotations.length; i++) {
+    if (i < annotations.length - 1) {
+      if (annotations[i].xMax === annotations[i + 1].xMin && annotations[i].backgroundColor === annotations[i + 1].backgroundColor) {
+        annotations[i].xMax = annotations[i + 1].xMax;
+        annotations.splice(i + 1, 1);
+        i--;
+      }
+    }
+  }
+
 
   return annotations;
 }
