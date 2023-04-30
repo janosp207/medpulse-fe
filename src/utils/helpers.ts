@@ -395,7 +395,7 @@ export const prepareActivityDatasets = (activities: ActivityData[]): any => {
     pointHitRadius: 30,
   },
   {
-    label: 'Distance',
+    label: 'Distance (m)',
     data: distanceDataset,
     borderColor: 'green',
     backgroundColor: 'green',
