@@ -33,17 +33,6 @@ export default class Warning {
         return 'often';
       }
     }
-
-    if(this.type === 'Sleep apnea') {
-      if (this.value === 0) {
-        return 'none';
-      }
-      if (this.value > 1 && this.value < 4) {
-        return 'sometimes';
-      }
-      return 'often';
-    }
-
     if (this.value === 0) {
       return 'none';
     }
