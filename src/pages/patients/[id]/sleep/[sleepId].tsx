@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 import SleepLineChart from '@/components/Charts/SleepLineChart'
 import LimitBox from '@/components/LimitBox'
 import Header from '@/components/Patients/Header'
@@ -69,7 +70,7 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
         <Box display='flex' flexDirection='row' gap={3}>
           {Object.keys(colors).map(key => (
             <Box key={key} display='flex' flexDirection='row' alignItems='center' gap={1}>
-              <Box width={20} height={20} bgcolor={colors[key]}></Box>
+              <Box width={20} height={20} bgcolor={colors[key as keyof object]}></Box>
               <Typography>{key}</Typography>
             </Box>
           ))}
