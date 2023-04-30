@@ -198,6 +198,7 @@ export const prepareSleepDatasets = (sleepData: SleepData[]): any => {
     borderWidth: 1,
     z: 1,
     pointHitRadius: 30,
+    pointRadius: 0,
   }]
 
   return heartRatesDataset;

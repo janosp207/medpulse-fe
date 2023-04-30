@@ -17,7 +17,6 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
   return (
     <>
       <Header patient={patient} title={'Sleep data'}/>
-      <SleepLineChart sleepData={sleepData}/>
       {sleepSummary && 
             <Box mt={5}>
               <Typography mb={2} variant='h5'>Sleep Summary</Typography>
@@ -45,9 +44,20 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
                   limit={sleepSummary.hrMax}
                   unit=' BPM'
                 />
+                <LimitBox
+                  title='AHI'
+                  limit={sleepSummary.ahi}
+                  backgroundColor={sleepSummary.ahiColor}
+                />
               </Box>
+              { sleepSummary.ahiSeverity === 'Moderate' || sleepSummary.ahiSeverity === 'Severe' ?
+                <Typography variant='h5' color={sleepSummary.ahiColor} fontWeight={'bold'} mt={2}>
+                  {sleepSummary.ahiSeverity} sleep apnea. An avarage of {sleepSummary.ahi} apneas per hour.
+                </Typography> : ''
+              }
             </Box>
       }
+      <SleepLineChart sleepData={sleepData}/>
     </>
   )
 }

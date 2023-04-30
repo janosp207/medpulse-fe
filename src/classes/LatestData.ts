@@ -129,6 +129,7 @@ export class SleepSummary {
   hrAverage = 0
   hrMin = 0
   hrMax = 0
+  ahi = 0
 
   constructor(data: Partial<SleepSummary & AdditionalProps>) {
     this.startdate = data.startdate ?? this.startdate;
@@ -139,6 +140,7 @@ export class SleepSummary {
     this.hrAverage = data.hr_average ?? this.hrAverage;
     this.hrMin = data.hr_min ?? this.hrMin;
     this.hrMax = data.hr_max ?? this.hrMax;
+    this.ahi = data.ahi ?? this.ahi;
   }
 
   get duration(): string {
@@ -154,8 +156,32 @@ export class SleepSummary {
   get formattedLatency(): string {
     return `${this.sleepScore} min`;
   }
-}
 
+  get ahiSeverity(): string {
+    switch(true) {
+      case this.ahi < 5:
+        return 'Normal'
+      case this.ahi < 15:
+        return 'Mild'
+      case this.ahi < 30:
+        return 'Moderate'
+      default:
+        return 'Severe'
+    }
+  }
+  get ahiColor(): string {
+    switch(true) {
+      case this.ahi < 5:
+        return '#4CAF50'
+      case this.ahi < 15:
+        return '#FFC107'
+      case this.ahi < 30:
+        return '#FF8A5B'
+      default:
+        return '#FF5C5C'
+    }
+  }
+}
 export class HeightData {
   value = 0
   date = 0
