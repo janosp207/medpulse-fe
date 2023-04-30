@@ -25,7 +25,7 @@ const StyledPatientWeightBox = styled(Box)({
   paddingTop: 20,
   borderRadius: 20,
   textAlign: 'center',
-  marginTop: 40,
+  marginTop: 25,
 })
 
 const StyledInfoButton = styled(Button)({
@@ -52,22 +52,30 @@ const BasicPatientInfo = ({ patient, latestData }: Props): JSX.Element => {
 
   return (
     <>
-      <StyledPatientInfoBox> 
-        <Stack>
-          <Typography >Name</Typography>
-          <Typography variant='h5' fontWeight='bold'>{patient.name}</Typography>
-        </Stack>
-        <Stack>
-          <Typography>Age</Typography>
-          <Typography variant='h5' fontWeight='bold'>{patient.age}</Typography>
-        </Stack>
-      </StyledPatientInfoBox>
-
+      <Box sx={{ backgroundColor: '#D1DFE5', borderRadius: 5 }}>
+        <StyledPatientInfoBox> 
+          <Stack>
+            <Typography >Name</Typography>
+            <Typography variant='h5' fontWeight='bold'>{patient.name}</Typography>
+          </Stack>
+          <Stack>
+            <Typography>Age</Typography>
+            <Typography variant='h5' fontWeight='bold'>{patient.age}</Typography>
+          </Stack>
+        </StyledPatientInfoBox>
+        <Link href={PATHS.PATIENT.WELLNESS.replace(':id', patient.user_id)}>
+          <Button sx={{ backgroundColor: '#7B949F', borderRadius: '0 0 10px 10px', color: 'black', width: '100%' }}>
+              View  wellness reports
+          </Button>
+        </Link>
+      </Box>
+      
       <StyledPatientWeightBox>
         <Stack>
           <Typography>Weight</Typography>
           <Typography variant="h5" fontWeight='bold'>{latestWeight.formattedDate}</Typography>
         </Stack>
+        
 
         <Stack>
           <Typography mt={3} mb={3} variant="h3" fontWeight='bold'>{latestWeight.value} Kg</Typography>
