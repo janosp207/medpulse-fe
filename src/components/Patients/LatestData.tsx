@@ -1,7 +1,8 @@
 import LatestDataType from '@/classes/LatestData'
 import Patient from '@/classes/Patient'
 import { PATHS } from '@/router'
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Button, Grid, Typography } from '@mui/material'
+import Link from 'next/link'
 import BigInfoBox from './InfoBoxes/BigInfoBox'
 import SleepBox from './InfoBoxes/SleepBox'
 import SmallInfoBox from './InfoBoxes/SmallInfoBox'
@@ -18,8 +19,12 @@ const LatestData = ({ latestData, patient }: Props): JSX.Element => {
     <>
       <SleepBox patient={patient} sleepSummary={latestData.latestSleepSummary}/>
       <Box mt={5}>
-        <Typography variant='h5' mb={2}>Activity data</Typography>
-
+        <Box display='flex' flexDirection='row' gap={3}>
+          <Typography variant='h5' mb={2}>Activity data</Typography>
+          <Link href={PATHS.PATIENT.ACTIVITY.replace(':id', patient.user_id)}>
+            <Button sx={{ backgroundColor: '#D1DFE5', borderRadius: 50, color: 'black' }}>More activity info</Button>
+          </Link>
+        </Box>
         <Grid  container spacing={10}>
           <Grid item xs={12} md={3}>
             <SmallInfoBox title='Steps' date={latestActivity.formattedDate} value={latestActivity.formattedSteps} />

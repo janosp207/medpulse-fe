@@ -1,4 +1,4 @@
-import LatestData from '@/classes/LatestData'
+import LatestData, { ActivityData } from '@/classes/LatestData'
 import LimitValues from '@/classes/LimitValues'
 import Patient from '@/classes/Patient'
 import Warning from '@/classes/Warning'
@@ -102,6 +102,24 @@ export const useWarnings = (id: string): useWarningsReturnType => {
 
   return {
     warnings : warnings ? warnings.map((warning: any) => new Warning(warning)) : undefined,
+    isLoading,
+  }
+}
+
+type useActivityReturnType = {
+  activity: ActivityData[] | undefined
+  isLoading: boolean
+}
+
+export const useActivity = (id: string): useActivityReturnType => {
+  const { data: activity, isLoading } = useSWR(API_PATHS.PATIENTS.ACTIVITY.replace(':id', id), async url => {
+    const { data } = await axios.get(url);
+
+    return data;
+  });
+
+  return {
+    activity: activity ? activity.map((activityData: any) => new ActivityData(activityData)) : undefined,
     isLoading,
   }
 }

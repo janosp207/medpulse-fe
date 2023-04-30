@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-types */
-import { BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
+import { ActivityData, BloodOxygenData, BloodPressureData, BodyFatData, HeightData, WeightData } from '@/classes/LatestData';
 import LimitValues from '@/classes/LimitValues';
 import SleepLog, { SleepData, SleepStates } from '@/classes/SleepLog';
 
@@ -351,5 +351,57 @@ export const prepareSleepDurationChart = (sleepLogs: SleepLog[]): any => {
     pointHitRadius: 30,
   }]
 
+  return datasets;
+}
+
+export const prepareActivityDatasets = (activities: ActivityData[]): any => {
+  //return datasets for steps, calories, distance
+  const stepsDataset = [] as any;
+  const caloriesDataset = [] as any;
+  const distanceDataset = [] as any;
+
+  activities.forEach((activity: ActivityData) => {
+    stepsDataset.push({
+      x: formatDate(activity.createdAt),
+      y: activity.steps,
+    })
+    caloriesDataset.push({
+      x: formatDate(activity.createdAt),
+      y: activity.calories,
+    })
+    distanceDataset.push({
+      x: formatDate(activity.createdAt),
+      y: activity.distance,
+    })
+  }
+  )
+
+  const datasets = [{
+    label: 'Steps',
+    data: stepsDataset,
+    borderColor: 'red',
+    backgroundColor: 'red',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  },
+  {
+    label: 'Calories',
+    data: caloriesDataset,
+    borderColor: 'blue',
+    backgroundColor: 'blue',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  },
+  {
+    label: 'Distance',
+    data: distanceDataset,
+    borderColor: 'green',
+    backgroundColor: 'green',
+    yAxisID: 'y-axis-1',
+    pointRadius: 5,
+    pointHitRadius: 30,
+  }]
   return datasets;
 }

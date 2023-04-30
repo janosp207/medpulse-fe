@@ -5,6 +5,7 @@ const PATHS = {
     WEIGHT: '/patients/:id/weight',
     BLOOD_PRESSURE: '/patients/:id/bloodpressure',
     BLOOD_OXYGEN: '/patients/:id/bloodoxygen',
+    ACTIVITY: '/patients/:id/activity',
   },
   SLEEP: {
     INDEX: '/patients/:id/sleep',
@@ -22,6 +23,7 @@ const API_PATHS = {
     BLOOD_PRESSURE: '/api/patients/:id/bloodpressure',
     BLOOD_OXYGEN: '/api/patients/:id/bloodoxygen',
     WARNINGS: '/api/patients/:id/warnings',
+    ACTIVITY: '/api/patients/:id/activity',
   },
   SLEEP: {
     INDEX: '/api/patients/:id/sleep', 
