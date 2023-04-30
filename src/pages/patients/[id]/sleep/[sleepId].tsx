@@ -9,6 +9,13 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
   const { patient, isLoading: isPatientLoading } = usePatient(id)
   const { sleepData, sleepSummary, isLoading } = useSleep(id, sleepId)
 
+  const colors = {
+    'Awake': 'rgb(255, 128, 0, 0.2)',
+    'Light sleep': 'rgb(100, 100, 255, 0.2)',
+    'Deep sleep': 'rgb(30, 30, 255, 0.2)',
+    'REM': 'rgb(0, 0, 255, 0.3)',
+  }
+
   if (isPatientLoading || isLoading) return <Typography>Loading...</Typography>
 
   if (!patient) return <Typography>Could not find patient</Typography>
@@ -57,6 +64,18 @@ const PatientWeight = ({ id, sleepId }: {id: string, sleepId: string}): JSX.Elem
               }
             </Box>
       }
+      <Box mt={5}>
+        <Typography mb={2} variant='h5'>Legend</Typography>
+        <Box display='flex' flexDirection='row' gap={3}>
+          {Object.keys(colors).map(key => (
+            <Box key={key} display='flex' flexDirection='row' alignItems='center' gap={1}>
+              <Box width={20} height={20} bgcolor={colors[key]}></Box>
+              <Typography>{key}</Typography>
+            </Box>
+          ))}
+        </Box>
+      </Box>
+      
       <SleepLineChart sleepData={sleepData}/>
     </>
   )
