@@ -67,6 +67,7 @@ const SleepBox = ({ patient, sleepSummary }: Props): JSX.Element => {
           <Stack>
             <Typography fontWeight='bold'>{formatDate(sleepSummary.startdate)}</Typography>
             <Typography fontWeight='bold' variant='h4'>{sleepSummary.sleepScore}</Typography>
+            <Typography fontSize={10} >More info</Typography>
           </Stack>
         </SleepScore>
       </Link>

@@ -33,6 +33,11 @@ export default class Warning {
         return 'often';
       }
     }
+    if(this.type === 'sleep apnea') {
+      if(this.text.includes('Normal')){
+        return 'none';
+      }
+    } 
     if (this.value === 0) {
       return 'none';
     }
