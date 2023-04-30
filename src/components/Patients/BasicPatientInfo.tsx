@@ -64,7 +64,7 @@ const BasicPatientInfo = ({ patient, latestData }: Props): JSX.Element => {
           </Stack>
         </StyledPatientInfoBox>
         <Link href={PATHS.PATIENT.WELLNESS.replace(':id', patient.user_id)}>
-          <Button sx={{ backgroundColor: '#7B949F', borderRadius: '0 0 10px 10px', color: 'black', width: '100%' }}>
+          <Button sx={{ backgroundColor: '#7B949F', borderRadius: '0 0 10px 10px', color: 'black', width: '100%', fontWeight: 'bold' }}>
               View  wellness reports
           </Button>
         </Link>
