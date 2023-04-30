@@ -1,3 +1,4 @@
+import { SleepSummary } from '@/classes/LatestData'
 import { formatDate, getDurationFromTimestamps } from '@/utils/helpers'
 
 export enum SleepStates {
@@ -42,20 +43,23 @@ export default class SleepLog {
   patientId = 0
   startdate = 0
   enddate = 0
+  sleepSummary: null | SleepSummary = null
 
   constructor(data: Partial<SleepLog & AdditionalProps>) {
     this.id = data.id ?? this.id;
     this.patientId = data.patient_id ?? this.patientId;
     this.startdate = data.startdate ?? this.startdate;
     this.enddate = data.enddate ?? this.enddate;
+    this.sleepSummary = data.sleepSummary ? new SleepSummary(data.sleepSummary) : this.sleepSummary;
   }
 
   get rawDuration(): number {
     return this.enddate - this.startdate
   }
 
-  get duration(): { hours: number, minutes: number} {
-    return getDurationFromTimestamps(this.startdate, this.enddate)
+  get duration(): string {
+    const { hours, minutes } = getDurationFromTimestamps(this.startdate, this.enddate)
+    return `${hours}h ${minutes}m`
   }
 
   get formattedDate(): string {

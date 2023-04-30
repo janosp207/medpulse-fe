@@ -318,7 +318,7 @@ export const prepareSleepDurationChart = (sleepLogs: SleepLog[]): any => {
   sleepLogs.forEach((sleep: SleepLog) => {
     sleepDurationDataset.push({
       x: formatDate(sleep.startdate),
-      y: sleep.rawDuration,
+      y: sleep.sleepSummary ? sleep.sleepSummary.totalSleepTime : sleep.rawDuration,
     })
   })
 

@@ -24,6 +24,16 @@ export default class Warning {
   }
 
   get warningCountIcon(): string {
+    if(this.type === 'wellness') {
+      if(this.value < 0.5) {
+        return 'none';
+      } else if (this.value < 1.5) {
+        return 'sometimes';
+      } else { 
+        return 'often';
+      }
+    }
+
     if(this.type === 'Sleep apnea') {
       if (this.value === 0) {
         return 'none';

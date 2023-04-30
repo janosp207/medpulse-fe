@@ -49,7 +49,7 @@ const WarningCountColors: WarningColorProps = {
 
 
 const StyledBox = styled(Box) ({
-  width: '15rem',
+  minWidth: '15rem',
   height: '3rem',
   display: 'flex',
   flexDirection: 'row',

@@ -16,19 +16,20 @@ const StyledButton = styled(Button)({
   alignItems: 'center',
   justifyContent: 'center',
   textAlign: 'center',
-  backgroundColor: '#D1DFE5',
   color: 'black',
   borderRadius: 10
 })
 
 const SleepLog = ({ sleepLog, patientId }: Props): JSX.Element => {
-  const { hours, minutes } = sleepLog.duration
+  const duration = sleepLog.sleepSummary ? sleepLog.sleepSummary.duration : sleepLog.duration
+  console.log(sleepLog)
 
   return (
     <Link href={PATHS.SLEEP.SHOW.replace(':id', patientId).replace(':sleepId', `${sleepLog.id}`)}>
-      <StyledButton>
+      <StyledButton sx={{ backgroundColor: sleepLog.sleepSummary?.ahiColor || '#D1DFE5' }}>
         <Typography>{sleepLog.formattedDate}</Typography>
-        <Typography variant='h6' fontWeight='bold'>{hours}h {minutes}m</Typography>
+        <Typography variant='h6' fontWeight='bold'>{duration}</Typography>
+        <Typography fontSize={10}>{sleepLog.sleepSummary?.ahiSeverity} apnea</Typography>
       </StyledButton>
     </Link>
   )

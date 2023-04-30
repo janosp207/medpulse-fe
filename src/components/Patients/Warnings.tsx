@@ -12,7 +12,7 @@ const Warnings = ({ warnings }: Props): JSX.Element => {
   return (
     <Box pl={3} pt={3}>
       <Typography variant='h6' mb={2}>Based on data from last 30 days and possible warnings</Typography>
-      <Box display='flex' flexDirection='row' gap={3}> 
+      <Box display='flex' flexDirection='row' flexWrap={'wrap'} gap={3}> 
         {warnings.map(warning => (
           <WarningBox key={warning.type} warning={warning}/>
         ))}
