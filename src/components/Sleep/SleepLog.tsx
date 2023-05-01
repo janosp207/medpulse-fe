@@ -22,7 +22,6 @@ const StyledButton = styled(Button)({
 
 const SleepLog = ({ sleepLog, patientId }: Props): JSX.Element => {
   const duration = sleepLog.sleepSummary ? sleepLog.sleepSummary.duration : sleepLog.duration
-  console.log(sleepLog)
 
   return (
     <Link href={PATHS.SLEEP.SHOW.replace(':id', patientId).replace(':sleepId', `${sleepLog.id}`)}>
