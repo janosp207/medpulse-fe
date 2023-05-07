@@ -56,25 +56,25 @@ export default class Warning {
     }
 
     //stable
-    if (this.slope > -0.07 && this.slope < 0.07) {
+    if (this.slope > -0.1 && this.slope < 0.1) {
       return 'stable';
     }
 
     //rising
-    if (this.slope > 0.07 && this.slope < 0.17) {
+    if (this.slope > 0.1 && this.slope < 0.3) {
       return 'rising';
     }
 
-    if (this.slope > 0.17) {
+    if (this.slope > 0.3) {
       return 'rapidly rising';
     }
 
     //falling
-    if (this.slope < -0.07 && this.slope > -0.17) {
+    if (this.slope < -0.1 && this.slope > -0.3) {
       return 'falling';
     }
 
-    if (this.slope < -0.17) {
+    if (this.slope < -0.3) {
       return 'rapidly falling';
     }
 
