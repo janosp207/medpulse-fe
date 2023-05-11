@@ -13,6 +13,8 @@ import {
 } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 ChartJS.register(
   CategoryScale,
@@ -28,6 +30,16 @@ ChartJS.register(
 
 
 export default function App({ Component, pageProps }: AppProps): JSX.Element {
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem('token'); // Replace 'token' with your authentication token key
+
+    if (router.pathname !== '/login' && !isAuthenticated) {
+      router.push('/login');
+    }
+  }, [router]);
+
   return (
     <Container maxWidth='xl'>
       <Component {...pageProps} />

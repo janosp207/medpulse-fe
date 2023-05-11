@@ -30,6 +30,9 @@ const API_PATHS = {
   SLEEP: {
     INDEX: '/api/patients/:id/sleep', 
     SHOW: '/api/patients/:id/sleep/:sleepId',
+  },
+  DOCTORS: {
+    LOGIN: '/api/doctors/login',
   }
 }
 
