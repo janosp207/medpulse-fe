@@ -30,7 +30,6 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
   const diastolicMinRef = useRef<HTMLInputElement>(null);
   const bloodOxygenMaxRef = useRef<HTMLInputElement>(null);
   const bloodOxygenMinRef = useRef<HTMLInputElement>(null);
-  const sleepDurationRef = useRef<HTMLInputElement>(null);
 
   if (isLoading) {
     return <>Loading...</>;
@@ -81,10 +80,6 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
       name: 'bloodOxygenMin',
       ref: bloodOxygenMinRef
     },
-    {
-      name: 'sleepDurationMin',
-      ref: sleepDurationRef
-    }
   ]
 
   const handleSubmit = async () => {
@@ -210,20 +205,6 @@ const LimitsDialog = ({ patient, onClose, open }: Props): JSX.Element => {
               fullWidth
               variant="outlined"
               inputRef={bloodOxygenMinRef}
-            />
-          </Stack>
-
-          <Stack>
-            <Typography variant='h5' mb={3}>Sleep</Typography>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Sleep duration"
-              defaultValue={limitValues.sleepDurationMin}
-              name="sleepDuration"
-              fullWidth
-              variant="outlined"
-              inputRef={sleepDurationRef}
             />
           </Stack>
         </Box>
