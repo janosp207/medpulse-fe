@@ -60,14 +60,18 @@ const SleepBox = ({ patient, sleepSummary }: Props): JSX.Element => {
           <Typography variant='h5'>HR</Typography>
           <Typography variant='h4' fontWeight='bold'>{sleepSummary.hrAverage}</Typography>
         </Stack>
+
+        <Stack>
+          <Typography variant='h5'>Score</Typography>
+          <Typography variant='h4' fontWeight='bold'>{sleepSummary.sleepScore}</Typography>
+        </Stack>
       </Box>
 
       <Link href={PATHS.SLEEP.INDEX.replace(':id', patient.user_id)}>
         <SleepScore>
           <Stack>
-            <Typography fontWeight='bold'>{formatDate(sleepSummary.startdate)}</Typography>
-            <Typography fontWeight='bold' variant='h4'>{sleepSummary.sleepScore}</Typography>
-            <Typography fontSize={10} >More info</Typography>
+            <Typography fontSize={10} fontWeight='bold' color='black'>{formatDate(sleepSummary.startdate)}</Typography>
+            <Typography fontSize={14} color='black' fontWeight={'bold'}>More info</Typography>
           </Stack>
         </SleepScore>
       </Link>

@@ -22,7 +22,7 @@ const LatestData = ({ latestData, patient }: Props): JSX.Element => {
         <Box display='flex' flexDirection='row' gap={3}>
           <Typography variant='h5' mb={2}>Activity data</Typography>
           <Link href={PATHS.PATIENT.ACTIVITY.replace(':id', patient.user_id)}>
-            <Button sx={{ backgroundColor: '#7B949F', borderRadius: 50, color: 'white' }}>More activity info</Button>
+            <Button sx={{ backgroundColor: '#7B949F', borderRadius: 50, color: 'black', fontWeight: 'bold' }}>More activity info</Button>
           </Link>
         </Box>
         <Grid  container spacing={10}>
