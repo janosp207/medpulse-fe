@@ -1,6 +1,6 @@
 import Patient from '@/classes/Patient'
 import { PATHS } from '@/router'
-import { Home } from '@mui/icons-material'
+import { Home, LogoutRounded } from '@mui/icons-material'
 import { Box, Button, Stack, Typography } from '@mui/material'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -12,6 +12,11 @@ const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.El
 
   const goBack = () => {
     router.back();
+  }
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    router.push(PATHS.DOCTOR.LOGIN);
   }
   
   return (
@@ -27,6 +32,7 @@ const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.El
           <Button sx={{ width: 50, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}><Home/></Button>
         </Link>
         <Button sx={{ width: 250, height: 40, color: 'black', backgroundColor: '#D1DFE5' }} onClick={() => setOpenDialog(true)}>Add threshold values</Button>
+        <Button onClick={() => logout()}sx={{ width: 50, height: 40, color: 'black', backgroundColor: '#D1DFE5' }}><LogoutRounded/></Button>
       </Box>
 
       <LimitsDialog patient={patient} open={openDialog} onClose={() => setOpenDialog(false)}/>

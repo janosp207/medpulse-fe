@@ -11,6 +11,9 @@ const PATHS = {
   SLEEP: {
     INDEX: '/patients/:id/sleep',
     SHOW: '/patients/:id/sleep/:sleepId',
+  },
+  DOCTOR: {
+    LOGIN: '/login',
   }
 };
 
