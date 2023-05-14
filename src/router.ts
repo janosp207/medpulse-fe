@@ -19,8 +19,8 @@ const PATHS = {
 
 const API_PATHS = {
   PATIENTS: {
-    GET: '/api/patients',
-    SHOW: '/api/patients/:id',
+    GET: '/api/patients/:doctorId',
+    SHOW: '/api/patients/show/:id',
     LATEST_DATA: '/api/patients/:id/latestdata',
     MEASUREMENTS: '/api/patients/:id/measurements/:type',
     LIMIT_VALUES: '/api/patients/:id/limitvalues',

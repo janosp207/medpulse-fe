@@ -11,8 +11,8 @@ const LoginScreen = (): JSX.Element => {
 
   const handleLogin = async () => {
     const response = await login(name, password);
-    if (response.message === 'Login successful') {
-      localStorage.setItem('token', response.message);
+    if (response.doctorId) {
+      localStorage.setItem('id', response.doctorId);
       router.push('/');
     }
   };

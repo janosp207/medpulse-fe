@@ -15,7 +15,7 @@ const Header = ({ patient, title }: { patient: Patient, title: string }): JSX.El
   }
 
   const logout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('id');
     router.push(PATHS.DOCTOR.LOGIN);
   }
   

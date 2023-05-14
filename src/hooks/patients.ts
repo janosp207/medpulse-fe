@@ -11,8 +11,8 @@ type usePatientsReturnType = {
   error: any
 }
 
-export const usePatients = (): usePatientsReturnType => {
-  const { data: patients, isLoading, error } = useSWR<Patient[]>(API_PATHS.PATIENTS.GET, async url => {
+export const usePatients = (id: string): usePatientsReturnType => {
+  const { data: patients, isLoading, error } = useSWR<Patient[]>(API_PATHS.PATIENTS.GET.replace(':doctorId', id), async url => {
     const { data } = await axios.get(url);
 
     return data;

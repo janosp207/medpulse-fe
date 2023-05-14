@@ -33,7 +33,7 @@ export default function App({ Component, pageProps }: AppProps): JSX.Element {
   const router = useRouter();
 
   useEffect(() => {
-    const isAuthenticated = localStorage.getItem('token'); // Replace 'token' with your authentication token key
+    const isAuthenticated = localStorage.getItem('id'); // Replace 'token' with your authentication token key
 
     if (router.pathname !== '/login' && !isAuthenticated) {
       router.push('/login');
